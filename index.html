@@ -1,1 +1,168 @@
-Hello CHABBRA
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chhabra Cloth House</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#FAF7F2;
+}
+
+/* HERO */
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:50px;
+  height:100vh;
+}
+
+.hero img{
+  width:40%;
+}
+
+.text{
+  width:50%;
+}
+
+h1{
+  font-size:50px;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  background:black;
+  color:white;
+  cursor:pointer;
+}
+
+/* SECTION */
+.section{
+  padding:60px;
+  text-align:center;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.grid img{
+  width:100%;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.grid img:hover{
+  transform:scale(1.05);
+}
+
+/* FOOTER */
+.footer{
+  background:black;
+  color:white;
+  padding:40px;
+  display:flex;
+  justify-content:space-between;
+}
+</style>
+</head>
+
+<body>
+
+<!-- OWNER SECTION -->
+<div class="hero">
+
+<div>
+<img src="images/owner.jpg">
+<p style="text-align:center;">Gautam Singh Chhabra</p>
+</div>
+
+<div class="text">
+<h1>CHHABRA</h1>
+<p>Cloth House</p>
+<p>Premium Fabric Collection</p>
+
+<button onclick="scrollDown()">Explore</button>
+</div>
+
+</div>
+
+<!-- SUITS -->
+<div class="section" id="suits">
+<h2>Our Best Collection in Suits</h2>
+
+<div class="grid">
+<img src="images/suit1.png" onclick="go(1)">
+<img src="images/suit2.png" onclick="go(2)">
+<img src="images/suit3.png" onclick="go(3)">
+<img src="images/suit4.png" onclick="go(4)">
+</div>
+</div>
+
+<!-- DUPPATTA -->
+<div class="section">
+<h2>Dupatta Collection</h2>
+
+<div class="grid">
+<img src="images/duppata1.png">
+<img src="images/duppata2.png">
+<img src="images/duppata3.png">
+<img src="images/duppata4.png">
+</div>
+</div>
+
+<!-- FABRIC -->
+<div class="section">
+<h2>Fabric Collection</h2>
+
+<div class="grid">
+<img src="images/fabric1.png">
+<img src="images/fabric2.jpg">
+<img src="images/fabric3.jpg">
+<img src="images/fabric4.jpg">
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+<!-- WEBSITE -->
+<div>
+<h3>Follow</h3>
+<a href="https://www.instagram.com/g_singh9012?igsh=dmRla2Q2OTBrcjFv">Instagram</a><br>
+<a href="#">Facebook</a><br>
+<a href="#">Twitter</a>
+</div>
+
+  <!-- CONTACT -->
+<div>
+<h3>Contact</h3>
+<p>+91 9286175004</p>
+
+<button onclick="map()">View Location</button>
+</div>
+
+</div>
+
+<script>
+function scrollDown(){
+document.getElementById("suits").scrollIntoView({behavior:"smooth"});
+}
+
+function go(n){
+window.location.href="product"+n+".html";
+}
+
+function map(){
+window.open("https://maps.app.goo.gl/Byc9CWc4PjPcx67P6?g_st=aw");
+}
+</script>
+
+</body>
+</html>
