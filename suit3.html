@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Product</title>
+
+<style>
+body{
+background:black;
+color:white;
+font-family:Arial;
+padding:40px;
+}
+
+img{
+width:300px;
+}
+
+button{
+padding:10px 20px;
+margin-top:10px;
+cursor:pointer;
+}
+
+.gold{
+color:gold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔧 CHANGE IMAGE -->
+<img src="images/suit3.png">
+
+<h1 class="gold">Pink Sharara</h1>
+
+<p>₹1200</p>
+
+<p>Fabric: Linen</p>
+<p>Type: Sharara</p>
+<p>Occasion: Wedding, Casual</p>
+
+<!-- 🔧 CHANGE DESCRIPTION -->
+<p>You can wear it on wedding and party</p>
+
+<button onclick="buy()">Buy on WhatsApp</button>
+<button onclick="back()">Back</button>
+
+<script>
+function buy(){
+window.open("https://wa.me/919286175004?text=Hello I want Pink Sharara ₹1200");
+}
+
+function back(){
+window.location.href="index.html";
+}
+</script>
+
+</body>
+</html>
