@@ -960,20 +960,17 @@ function goToProduct(image, name, price, fabric, occasion, description){
   // Start glitter animation
   createGlitter();
 
-  // Store product data
-  const productData = {
-    image: image,
-    name: name,
-    price: price,
-    fabric: fabric,
-    occasion: occasion,
-    description: description
-  };
-  localStorage.setItem('currentProduct', JSON.stringify(productData));
-
-  // Navigate after animation
+  // Navigate using URL parameters (works on ALL devices including phone)
   setTimeout(() => {
-    window.location.href = 'product.html';
+    const params = new URLSearchParams({
+      image: image,
+      name: name,
+      price: price,
+      fabric: fabric,
+      occasion: occasion,
+      description: description
+    });
+    window.location.href = 'product.html?' + params.toString();
   }, 1200);
 }
 
