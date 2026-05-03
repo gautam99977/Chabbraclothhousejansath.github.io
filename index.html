@@ -6,17 +6,61 @@
 <title>Chhabra Cloth House</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet"/>
 <style>
-
-/* ============================================
-   GLOBAL STYLES
-   ============================================ */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{
-  font-family:'Montserrat',sans-serif;
+body{font-family:'Montserrat',sans-serif;background:#000;color:#e8dcc8;overflow-x:hidden;}
+
+/* ============================================
+   WELCOME SCREEN ANIMATION
+   ============================================ */
+#welcome-screen{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
   background:#000;
+  z-index:99999;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+}
+.welcome-line{
+  width:0;
+  height:1px;
+  background:#C9A84C;
+  transition:width 0.8s ease;
+}
+.welcome-cch{
+  font-family:'Cormorant Garamond',serif;
+  font-size:100px;
+  color:rgba(201,168,76,0.15);
+  letter-spacing:20px;
+  opacity:0;
+  transition:opacity 0.8s ease;
+  font-weight:300;
+}
+.welcome-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;
   color:#e8dcc8;
-  overflow-x:hidden;
+  letter-spacing:8px;
+  font-style:italic;
+  opacity:0;
+  transition:opacity 0.8s ease;
+  font-weight:300;
+}
+.welcome-sub{
+  font-size:9px;
+  letter-spacing:6px;
+  color:#C9A84C;
+  text-transform:uppercase;
+  opacity:0;
+  transition:opacity 0.8s ease;
+}
+#welcome-screen.fade-out{
+  opacity:0;
+  transition:opacity 0.8s ease;
+  pointer-events:none;
 }
 
 /* ============================================
@@ -56,13 +100,10 @@ nav{
   font-family:'Montserrat',sans-serif;
   transition:all 0.3s ease;
 }
-.nav-whatsapp:hover{
-  background:#C9A84C;
-  color:#000;
-}
+.nav-whatsapp:hover{background:#C9A84C;color:#000;}
 
 /* ============================================
-   HERO SECTION - PAGE 1
+   HERO SECTION
    ============================================ */
 .hero{
   min-height:100vh;
@@ -70,7 +111,10 @@ nav{
   grid-template-columns:1fr 1.5fr;
   background:#000;
   padding-top:80px;
+  opacity:0;
+  transition:opacity 1s ease;
 }
+.hero.visible{opacity:1;}
 .hero-left{
   display:flex;
   flex-direction:column;
@@ -79,8 +123,7 @@ nav{
   padding:60px 40px 60px 60px;
   position:relative;
 }
-
-/* CHANGE OWNER PHOTO HERE */
+/* CHANGE OWNER PHOTO HERE → replace owner.jpg */
 .owner-photo{
   width:220px;
   height:220px;
@@ -88,14 +131,11 @@ nav{
   object-fit:cover;
   border:2px solid rgba(201,168,76,0.4);
   margin-bottom:30px;
-  animation:fadeUp 1.2s ease forwards;
 }
-
-/* CHANGE BRAND LOGO HERE */
+/* CHANGE BRAND LOGO HERE → replace BRAND.png */
 .brand-logo{
   width:280px;
   object-fit:contain;
-  animation:fadeUp 1.4s ease forwards;
   filter:brightness(1.1);
 }
 .hero-cch{
@@ -105,7 +145,7 @@ nav{
   font-family:'Cormorant Garamond',serif;
   font-size:120px;
   font-weight:300;
-  color:rgba(201,168,76,0.08);
+  color:rgba(201,168,76,0.06);
   letter-spacing:-5px;
   line-height:1;
   pointer-events:none;
@@ -135,7 +175,6 @@ nav{
   line-height:1.1;
   text-align:center;
   margin-bottom:15px;
-  animation:fadeUp 1s ease forwards;
   font-style:italic;
 }
 .hero-sub{
@@ -144,7 +183,6 @@ nav{
   color:#C9A84C;
   text-transform:uppercase;
   margin-bottom:50px;
-  animation:fadeUp 1.2s ease forwards;
 }
 .explore-btn{
   border:1px solid rgba(232,220,200,0.4);
@@ -157,7 +195,6 @@ nav{
   cursor:pointer;
   font-family:'Montserrat',sans-serif;
   transition:all 0.4s ease;
-  animation:fadeUp 1.4s ease forwards;
   position:relative;
   overflow:hidden;
 }
@@ -170,18 +207,12 @@ nav{
   transition:left 0.4s ease;
 }
 .explore-btn:hover::before{left:0;}
-.explore-btn:hover{
-  border-color:#C9A84C;
-  color:#C9A84C;
-}
+.explore-btn:hover{border-color:#C9A84C;color:#C9A84C;}
 
 /* ============================================
    SECTION TITLES
    ============================================ */
-.section-header{
-  text-align:center;
-  padding:80px 20px 50px;
-}
+.section-header{text-align:center;padding:80px 20px 50px;}
 .section-header h2{
   font-family:'Cormorant Garamond',serif;
   font-size:38px;
@@ -190,15 +221,10 @@ nav{
   font-style:italic;
   letter-spacing:2px;
 }
-.section-line{
-  width:60px;
-  height:1px;
-  background:#C9A84C;
-  margin:15px auto 0;
-}
+.section-line{width:60px;height:1px;background:#C9A84C;margin:15px auto 0;}
 
 /* ============================================
-   DUPATTA SECTION - PAGE 2
+   DUPATTA SECTION
    ============================================ */
 #dupatta{background:#000;}
 .dupatta-grid{
@@ -214,8 +240,7 @@ nav{
   aspect-ratio:3/4;
 }
 .product-card img{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   object-fit:cover;
   transition:transform 0.6s ease;
 }
@@ -229,6 +254,11 @@ nav{
   transition:transform 0.4s ease;
 }
 .product-card:hover .product-card-overlay{transform:translateY(0);}
+
+/* Mobile touch support */
+.product-card.touched .product-card-overlay{transform:translateY(0);}
+.product-card.touched img{transform:scale(1.05);}
+
 .know-details-btn{
   display:block;
   width:100%;
@@ -244,14 +274,11 @@ nav{
   transition:all 0.3s ease;
   text-align:center;
 }
-.know-details-btn:hover{
-  background:#C9A84C;
-  border-color:#C9A84C;
-  color:#000;
-}
+.know-details-btn:hover,
+.know-details-btn:active{background:#C9A84C;border-color:#C9A84C;color:#000;}
 
 /* ============================================
-   SUITS SECTION - PAGE 3
+   SUITS SECTION
    ============================================ */
 #suits{background:#0a0a0a;}
 .suits-grid{
@@ -269,8 +296,7 @@ nav{
   min-height:700px;
 }
 .suit-card-tall img{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   object-fit:cover;
   transition:transform 0.6s ease;
 }
@@ -282,8 +308,7 @@ nav{
   aspect-ratio:3/4;
 }
 .suit-card-small img{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   object-fit:cover;
   transition:transform 0.6s ease;
 }
@@ -297,8 +322,7 @@ nav{
   min-height:700px;
 }
 .suit-featured img{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   object-fit:cover;
   transition:transform 0.6s ease;
 }
@@ -340,11 +364,7 @@ nav{
   transition:all 0.3s ease;
   width:fit-content;
 }
-.shop-now-btn:hover{
-  background:#C9A84C;
-  border-color:#C9A84C;
-  color:#000;
-}
+.shop-now-btn:hover{background:#C9A84C;border-color:#C9A84C;color:#000;}
 .card-overlay{
   position:absolute;
   bottom:0;left:0;right:0;
@@ -354,10 +374,12 @@ nav{
   transition:transform 0.4s ease;
 }
 .suit-card-small:hover .card-overlay,
-.suit-card-tall:hover .card-overlay{transform:translateY(0);}
+.suit-card-tall:hover .card-overlay,
+.suit-card-small.touched .card-overlay,
+.suit-card-tall.touched .card-overlay{transform:translateY(0);}
 
 /* ============================================
-   COLLECTION SECTION - PAGE 4
+   COLLECTION SECTION
    ============================================ */
 #collection{background:#000;}
 .collection-text{
@@ -381,11 +403,11 @@ nav{
   font-style:italic;
   margin-bottom:30px;
 }
+/* CHANGE HINDI TEXT HERE */
 .collection-hindi{
   font-size:14px;
   line-height:2.2;
   color:rgba(232,220,200,0.7);
-  font-family:'Montserrat',sans-serif;
 }
 .fabric-grid{
   display:grid;
@@ -401,8 +423,7 @@ nav{
   cursor:pointer;
 }
 .fabric-card img{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   object-fit:cover;
   transition:transform 0.6s ease;
 }
@@ -414,7 +435,8 @@ nav{
   opacity:0;
   transition:opacity 0.4s ease;
 }
-.fabric-card:hover .fabric-shop-overlay{opacity:1;}
+.fabric-card:hover .fabric-shop-overlay,
+.fabric-card.touched .fabric-shop-overlay{opacity:1;}
 .fabric-shop-btn{
   padding:12px 30px;
   background:rgba(0,0,0,0.7);
@@ -428,13 +450,11 @@ nav{
   white-space:nowrap;
   transition:all 0.3s ease;
 }
-.fabric-shop-btn:hover{
-  background:#C9A84C;
-  color:#000;
-}
+.fabric-shop-btn:hover,
+.fabric-shop-btn:active{background:#C9A84C;color:#000;}
 
 /* ============================================
-   FOLLOW US SECTION - PAGE 5
+   FOLLOW US SECTION
    ============================================ */
 #follow{background:#0a0a0a;}
 .follow-container{
@@ -463,11 +483,7 @@ nav{
   text-transform:uppercase;
   margin-bottom:50px;
 }
-.social-links{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
+.social-links{display:flex;flex-direction:column;gap:20px;}
 .social-link{
   display:flex;
   align-items:center;
@@ -482,22 +498,10 @@ nav{
   transition:color 0.3s ease;
 }
 .social-link:hover{color:#C9A84C;}
-.social-link span{
-  font-size:18px;
-}
-.social-arrow{
-  margin-left:auto;
-  opacity:0;
-  transition:opacity 0.3s ease;
-}
+.social-arrow{margin-left:auto;opacity:0;transition:opacity 0.3s ease;}
 .social-link:hover .social-arrow{opacity:1;}
-
-/* CHANGE FOLLOW US PHOTO HERE */
-.follow-right img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+/* CHANGE FOLLOW US PHOTO HERE → replace sonal.png */
+.follow-right img{width:100%;height:100%;object-fit:cover;}
 
 /* ============================================
    FOOTER
@@ -517,24 +521,9 @@ footer{
   font-style:italic;
   margin-bottom:10px;
 }
-.footer-tagline{
-  font-size:9px;
-  letter-spacing:3px;
-  color:#C9A84C;
-  text-transform:uppercase;
-}
-.footer-title{
-  font-size:9px;
-  letter-spacing:3px;
-  color:#C9A84C;
-  text-transform:uppercase;
-  margin-bottom:20px;
-}
-.footer-text{
-  font-size:12px;
-  color:rgba(232,220,200,0.6);
-  line-height:2;
-}
+.footer-tagline{font-size:9px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;}
+.footer-title{font-size:9px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:20px;}
+.footer-text{font-size:12px;color:rgba(232,220,200,0.6);line-height:2;}
 .footer-map-btn{
   display:inline-block;
   margin-top:15px;
@@ -547,10 +536,7 @@ footer{
   text-decoration:none;
   transition:all 0.3s ease;
 }
-.footer-map-btn:hover{
-  background:#C9A84C;
-  color:#000;
-}
+.footer-map-btn:hover{background:#C9A84C;color:#000;}
 .footer-bottom{
   grid-column:span 3;
   border-top:1px solid rgba(232,220,200,0.08);
@@ -562,7 +548,7 @@ footer{
 }
 
 /* ============================================
-   GLITTER TRANSITION OVERLAY
+   GLITTER OVERLAY
    ============================================ */
 #glitter-overlay{
   position:fixed;
@@ -571,40 +557,23 @@ footer{
   pointer-events:none;
   z-index:9999;
   opacity:0;
+  background:transparent;
 }
 .glitter-particle{
   position:absolute;
-  width:6px;height:6px;
   border-radius:50%;
-  background:#C9A84C;
   pointer-events:none;
 }
 
 /* ============================================
-   ANIMATIONS
+   SCROLL ANIMATIONS
    ============================================ */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px);}
-  to{opacity:1;transform:translateY(0);}
-}
-@keyframes glitterBurst{
-  0%{transform:scale(0) translate(0,0);opacity:1;}
-  100%{transform:scale(1) translate(var(--tx),var(--ty));opacity:0;}
-}
-@keyframes shimmer{
-  0%{opacity:0;}
-  50%{opacity:1;}
-  100%{opacity:0;}
-}
 .fade-in{
   opacity:0;
   transform:translateY(30px);
   transition:opacity 0.8s ease,transform 0.8s ease;
 }
-.fade-in.visible{
-  opacity:1;
-  transform:translateY(0);
-}
+.fade-in.visible{opacity:1;transform:translateY(0);}
 
 /* ============================================
    MOBILE RESPONSIVE
@@ -616,16 +585,31 @@ footer{
   .hero-right{padding:40px 30px 60px;}
   .hero-tagline{font-size:36px;}
   .dupatta-grid{grid-template-columns:repeat(2,1fr);}
-  .suits-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
-  .suit-featured{grid-column:span 2;}
+  .suits-grid{grid-template-columns:1fr 1fr;}
+  .suit-card-tall{min-height:400px;}
+  .suit-featured{grid-column:span 2;min-height:400px;}
   .fabric-grid{grid-template-columns:repeat(2,1fr);}
   .follow-container{grid-template-columns:1fr;}
+  .follow-right{min-height:50vh;}
   footer{grid-template-columns:1fr;padding:40px 30px;}
   .footer-bottom{grid-column:span 1;}
+  .welcome-cch{font-size:60px;}
+  .welcome-name{font-size:22px;text-align:center;padding:0 20px;}
 }
 </style>
 </head>
 <body>
+
+<!-- ============================================
+     WELCOME SCREEN
+     ============================================ -->
+<div id="welcome-screen">
+  <div class="welcome-line" id="welcome-line"></div>
+  <div class="welcome-cch" id="welcome-cch">CCH</div>
+  <div class="welcome-name" id="welcome-name">Chhabra Cloth House</div>
+  <div class="welcome-sub" id="welcome-sub">-fine fabrics & ladies suits-</div>
+  <div class="welcome-line" id="welcome-line2"></div>
+</div>
 
 <!-- GLITTER OVERLAY -->
 <div id="glitter-overlay"></div>
@@ -635,7 +619,7 @@ footer{
      ============================================ -->
 <nav>
   <div class="nav-logo">chhabra cloth house</div>
-  <!-- CHANGE WHATSAPP NUMBER HERE -->
+  <!-- CHANGE WHATSAPP NUMBER HERE → replace 919286175004 -->
   <a class="nav-whatsapp" href="https://wa.me/919286175004" target="_blank">
     💬 whatsapp us
   </a>
@@ -653,9 +637,9 @@ footer{
     <div class="hero-cch">CCH</div>
   </div>
   <div class="hero-right">
-    <div class="hero-tagline fade-in">Chhabra<br/>Cloth House</div>
-    <div class="hero-sub fade-in">-fine fabrics and ladies suits-</div>
-    <button class="explore-btn fade-in"
+    <div class="hero-tagline">Chhabra<br/>Cloth House</div>
+    <div class="hero-sub">-fine fabrics and ladies suits-</div>
+    <button class="explore-btn"
       onclick="document.getElementById('dupatta').scrollIntoView({behavior:'smooth'})">
       Explore
     </button>
@@ -673,7 +657,9 @@ footer{
   <div class="dupatta-grid">
 
     <!-- CHANGE DUPATTA 1 PHOTO HERE → replace duppata1.png -->
-    <div class="product-card" onclick="goToProduct('duppata1','Embroidered Dupatta','₹XXX','Pure Silk','Festive & Casual','A beautiful hand-embroidered dupatta perfect for all occasions.')">
+    <!-- CHANGE DUPATTA 1 DETAILS HERE → name, price, fabric, occasion, description -->
+    <div class="product-card"
+      onclick="goToProduct('duppata1','png','Embroidered Dupatta','₹XXX','Pure Silk','Festive & Casual','A beautiful hand-embroidered dupatta perfect for all occasions.')">
       <img src="images/duppata1.png" alt="Dupatta 1"/>
       <div class="product-card-overlay">
         <button class="know-details-btn">know details</button>
@@ -681,7 +667,9 @@ footer{
     </div>
 
     <!-- CHANGE DUPATTA 2 PHOTO HERE → replace duppata2.png -->
-    <div class="product-card" onclick="goToProduct('duppata2','Printed Dupatta','₹XXX','Chiffon','Casual & Party','Vibrant printed dupatta with elegant border work.')">
+    <!-- CHANGE DUPATTA 2 DETAILS HERE -->
+    <div class="product-card"
+      onclick="goToProduct('duppata2','png','Printed Dupatta','₹XXX','Chiffon','Casual & Party','Vibrant printed dupatta with elegant border work.')">
       <img src="images/duppata2.png" alt="Dupatta 2"/>
       <div class="product-card-overlay">
         <button class="know-details-btn">know details</button>
@@ -689,7 +677,9 @@ footer{
     </div>
 
     <!-- CHANGE DUPATTA 3 PHOTO HERE → replace duppata3.png -->
-    <div class="product-card" onclick="goToProduct('duppata3','Designer Dupatta','₹XXX','Georgette','Wedding & Festive','Exclusive designer dupatta with intricate pattern work.')">
+    <!-- CHANGE DUPATTA 3 DETAILS HERE -->
+    <div class="product-card"
+      onclick="goToProduct('duppata3','png','Designer Dupatta','₹XXX','Georgette','Wedding & Festive','Exclusive designer dupatta with intricate pattern work.')">
       <img src="images/duppata3.png" alt="Dupatta 3"/>
       <div class="product-card-overlay">
         <button class="know-details-btn">know details</button>
@@ -697,7 +687,9 @@ footer{
     </div>
 
     <!-- CHANGE DUPATTA 4 PHOTO HERE → replace duppata4.png -->
-    <div class="product-card" onclick="goToProduct('duppata4','Floral Dupatta','₹XXX','Net','All Occasions','Light floral dupatta with premium finish.')">
+    <!-- CHANGE DUPATTA 4 DETAILS HERE -->
+    <div class="product-card"
+      onclick="goToProduct('duppata4','png','Floral Dupatta','₹XXX','Net','All Occasions','Light floral dupatta with premium finish.')">
       <img src="images/duppata4.png" alt="Dupatta 4"/>
       <div class="product-card-overlay">
         <button class="know-details-btn">know details</button>
@@ -718,7 +710,9 @@ footer{
   <div class="suits-grid">
 
     <!-- CHANGE SUIT 1 PHOTO HERE → replace suit1.png -->
-    <div class="suit-card-tall" onclick="goToProduct('suit1','Embroidered Suit','₹XXX','Cotton Silk','Festive','Elegant embroidered suit with fine detailing.')">
+    <!-- CHANGE SUIT 1 DETAILS HERE -->
+    <div class="suit-card-tall"
+      onclick="goToProduct('suit1','png','Embroidered Suit','₹XXX','Cotton Silk','Festive','Elegant embroidered suit with fine detailing.')">
       <img src="images/suit1.png" alt="Suit 1"/>
       <div class="card-overlay">
         <button class="know-details-btn">know details</button>
@@ -726,23 +720,29 @@ footer{
     </div>
 
     <!-- CHANGE SUIT 3 PHOTO HERE → replace suit3.png -->
-    <div class="suit-card-small" onclick="goToProduct('suit3','Printed Suit','₹XXX','Pure Cotton','Casual & Office','Comfortable printed suit for everyday wear.')">
+    <!-- CHANGE SUIT 3 DETAILS HERE -->
+    <div class="suit-card-small"
+      onclick="goToProduct('suit3','png','Printed Suit','₹XXX','Pure Cotton','Casual & Office','Comfortable printed suit for everyday wear.')">
       <img src="images/suit3.png" alt="Suit 3"/>
       <div class="card-overlay">
         <button class="know-details-btn">know details</button>
       </div>
     </div>
 
-    <!-- CHANGE SUITS1 PHOTO HERE → replace suits1.png -->
-    <div class="suit-card-small" onclick="goToProduct('suits1','Designer Suit','₹XXX','Georgette','Party & Wedding','Premium designer suit with modern cut.')">
-      <img src="images/new model.png" alt="Suit"/>
+    <!-- CHANGE NEW MODEL PHOTO HERE → replace new model.png -->
+    <!-- CHANGE NEW MODEL DETAILS HERE -->
+    <div class="suit-card-small"
+      onclick="goToProduct('new model','png','Designer Suit','₹XXX','Georgette','Party & Wedding','Premium designer suit with modern cut.')">
+      <img src="images/new model.png" alt="New Model"/>
       <div class="card-overlay">
         <button class="know-details-btn">know details</button>
       </div>
     </div>
 
     <!-- CHANGE FEATURED SUIT PHOTO HERE → replace suit2.png -->
-    <div class="suit-featured" onclick="goToProduct('suit2','Classic Suit','₹XXX','Premium Fabric','All Occasions','Our signature classic suit - timeless elegance.')">
+    <!-- CHANGE FEATURED SUIT DETAILS HERE -->
+    <div class="suit-featured"
+      onclick="goToProduct('suit2','png','Classic Suit','₹XXX','Premium Fabric','All Occasions','Our signature classic suit - timeless elegance.')">
       <img src="images/suit2.png" alt="Featured Suit"/>
       <div class="suit-featured-overlay">
         <div class="suit-featured-text">Shop our Latest</div>
@@ -763,31 +763,37 @@ footer{
     <div class="collection-title">Redefining Comfortable Classics</div>
   </div>
   <div class="collection-text fade-in">
-    <!-- CHANGE HINDI TEXT HERE -->
+    <!-- CHANGE HINDI TEXT HERE → replace text between <p> tags -->
     <p class="collection-hindi">
       Chhabra Cloth House में आपका हार्दिक स्वागत है। यहाँ हर महिला के लिए फैशन, एलिगेंस और गुणवत्ता का शानदार संगम मिलता है। हमारे यहाँ लेटेस्ट डिज़ाइन के सूट, खूबसूरत दुपट्टे, ट्रेंडी शरारा, प्रीमियम फैब्रिक्स, पेटीकोट, अस्तर और स्टोल की एक्सक्लूसिव कलेक्शन उपलब्ध है। हमारी पहचान है बेहतरीन क्वालिटी, सही दाम और ग्राहकों का भरोसा, जो हर खरीदारी को एक खास अनुभव बना देता है।
     </p>
   </div>
   <div class="fabric-grid">
 
-    <!-- CHANGE FABRIC 1 PHOTO HERE → replace grey1.jpg -->
-    <div class="fabric-card" onclick="goToProduct('grey1','Grey Silk Fabric','₹XXX per meter','Pure Silk','All Occasions','Premium grey silk fabric with smooth texture.')">
+    <!-- CHANGE FABRIC 1 PHOTO HERE → replace grey.jpg -->
+    <!-- CHANGE FABRIC 1 DETAILS HERE -->
+    <div class="fabric-card"
+      onclick="goToProduct('grey','jpg','Grey Silk Fabric','₹XXX per meter','Pure Silk','All Occasions','Premium grey silk fabric with smooth texture.')">
       <img src="images/grey.jpg" alt="Grey Fabric"/>
       <div class="fabric-shop-overlay">
         <button class="fabric-shop-btn">Shop Now</button>
       </div>
     </div>
 
-    <!-- CHANGE FABRIC 2 PHOTO HERE → replace yellow1.jpg -->
-    <div class="fabric-card" onclick="goToProduct('yellow1','Yellow Silk Fabric','₹XXX per meter','Pure Silk','Festive','Vibrant yellow silk perfect for festive occasions.')">
+    <!-- CHANGE FABRIC 2 PHOTO HERE → replace yellow.png -->
+    <!-- CHANGE FABRIC 2 DETAILS HERE -->
+    <div class="fabric-card"
+      onclick="goToProduct('yellow','png','Yellow Silk Fabric','₹XXX per meter','Pure Silk','Festive','Vibrant yellow silk perfect for festive occasions.')">
       <img src="images/yellow.png" alt="Yellow Fabric"/>
       <div class="fabric-shop-overlay">
         <button class="fabric-shop-btn">Shop Now</button>
       </div>
     </div>
 
-    <!-- CHANGE FABRIC 3 PHOTO HERE → replace red1.jpg -->
-    <div class="fabric-card" onclick="goToProduct('red1','Red Silk Fabric','₹XXX per meter','Banarasi Silk','Wedding & Bridal','Rich red banarasi silk for special occasions.')">
+    <!-- CHANGE FABRIC 3 PHOTO HERE → replace red.png -->
+    <!-- CHANGE FABRIC 3 DETAILS HERE -->
+    <div class="fabric-card"
+      onclick="goToProduct('red','png','Red Silk Fabric','₹XXX per meter','Banarasi Silk','Wedding & Bridal','Rich red banarasi silk for special occasions.')">
       <img src="images/red.png" alt="Red Fabric"/>
       <div class="fabric-shop-overlay">
         <button class="fabric-shop-btn">Shop Now</button>
@@ -795,7 +801,9 @@ footer{
     </div>
 
     <!-- CHANGE FABRIC 4 PHOTO HERE → replace fabric3.jpg -->
-    <div class="fabric-card" onclick="goToProduct('fabric3','Premium Fabric','₹XXX per meter','Mixed','All Occasions','Exclusive premium fabric from our special collection.')">
+    <!-- CHANGE FABRIC 4 DETAILS HERE -->
+    <div class="fabric-card"
+      onclick="goToProduct('fabric3','jpg','Premium Fabric','₹XXX per meter','Mixed','All Occasions','Exclusive premium fabric from our special collection.')">
       <img src="images/fabric3.jpg" alt="Premium Fabric"/>
       <div class="fabric-shop-overlay">
         <button class="fabric-shop-btn">Shop Now</button>
@@ -815,38 +823,40 @@ footer{
       <div class="follow-sub">stay connected with us</div>
       <div class="social-links">
 
-        <!-- CHANGE INSTAGRAM LINK HERE -->
-        <a class="social-link" href="https://www.instagram.com/g_singh9012?igsh=dmRla2Q2OTBrcjFv" target="_blank">
+        <!-- CHANGE INSTAGRAM LINK HERE → replace href link -->
+        <a class="social-link"
+          href="https://www.instagram.com/g_singh9012?igsh=dmRla2Q2OTBrcjFv"
+          target="_blank">
           <span>📸</span> Instagram
           <span class="social-arrow">→</span>
         </a>
 
-        <!-- CHANGE FACEBOOK LINK HERE → paste facebook link between the quotes -->
-        <a class="social-link" href="https://www.facebook.com/share/14fa2tdmQxk/" target="_blank">
+        <!-- CHANGE FACEBOOK LINK HERE → paste facebook link in href="" -->
+        <a class="social-link" href="#" target="_blank">
           <span>📘</span> Facebook
           <span class="social-arrow">→</span>
         </a>
 
-        <!-- CHANGE TWITTER LINK HERE → paste twitter link between the quotes -->
+        <!-- CHANGE TWITTER LINK HERE → paste twitter link in href="" -->
         <a class="social-link" href="#" target="_blank">
           <span>🐦</span> Twitter
           <span class="social-arrow">→</span>
         </a>
 
-        <!-- CHANGE WHATSAPP NUMBER HERE -->
-        <a class="social-link" href="https://wa.me/919286175004" target="_blank">
+        <!-- CHANGE WHATSAPP NUMBER HERE → replace 919286175004 -->
+        <a class="social-link"
+          href="https://wa.me/919286175004"
+          target="_blank">
           <span>💬</span> WhatsApp
           <span class="social-arrow">→</span>
         </a>
 
       </div>
     </div>
-
-    <!-- CHANGE FOLLOW US SECTION PHOTO HERE → replace sonal.png -->
+    <!-- CHANGE FOLLOW US PHOTO HERE → replace sonal.png -->
     <div class="follow-right">
-      <img src="images/sonal.png" alt="Chhabra Cloth House"/>
+      <img src="images/sonal.png" alt="Chhabra Cloth House Store"/>
     </div>
-
   </div>
 </section>
 
@@ -868,7 +878,7 @@ footer{
       <!-- CHANGE PHONE NUMBER HERE -->
       📞 +91 92861 75004
     </div>
-    <!-- CHANGE MAP LINK HERE -->
+    <!-- CHANGE MAP LINK HERE → replace href link -->
     <a class="footer-map-btn"
       href="https://maps.app.goo.gl/Byc9CWc4PjPcx67P6"
       target="_blank">
@@ -903,67 +913,127 @@ footer{
 
 <script>
 // ============================================
-// GLITTER TRANSITION ANIMATION
+// WELCOME SCREEN ANIMATION
+// ============================================
+window.addEventListener('load', function(){
+  const line1 = document.getElementById('welcome-line');
+  const line2 = document.getElementById('welcome-line2');
+  const cch = document.getElementById('welcome-cch');
+  const name = document.getElementById('welcome-name');
+  const sub = document.getElementById('welcome-sub');
+  const screen = document.getElementById('welcome-screen');
+  const hero = document.querySelector('.hero');
+
+  // Step 1: Draw gold lines
+  setTimeout(() => {
+    line1.style.width = '200px';
+    line2.style.width = '200px';
+  }, 300);
+
+  // Step 2: Show CCH
+  setTimeout(() => {
+    cch.style.opacity = '1';
+  }, 700);
+
+  // Step 3: Show name
+  setTimeout(() => {
+    name.style.opacity = '1';
+  }, 1000);
+
+  // Step 4: Show subtitle
+  setTimeout(() => {
+    sub.style.opacity = '1';
+  }, 1300);
+
+  // Step 5: Fade out welcome screen
+  setTimeout(() => {
+    screen.classList.add('fade-out');
+  }, 2500);
+
+  // Step 6: Remove welcome screen & show hero
+  setTimeout(() => {
+    screen.style.display = 'none';
+    hero.classList.add('visible');
+  }, 3300);
+});
+
+// ============================================
+// GLITTER TRANSITION — FIXED VERSION
 // ============================================
 function createGlitter(){
   const overlay = document.getElementById('glitter-overlay');
   overlay.innerHTML = '';
   overlay.style.opacity = '1';
-  overlay.style.background = 'rgba(0,0,0,0)';
+  overlay.style.background = 'transparent';
 
-  // Create 80 glitter particles
+  const colors = ['#C9A84C','#FFD700','#FFF8DC','#DAA520','#F5DEB3'];
+
   for(let i = 0; i < 80; i++){
-    const particle = document.createElement('div');
-    particle.className = 'glitter-particle';
-
-    // Random position
+    const p = document.createElement('div');
+    p.className = 'glitter-particle';
     const x = Math.random() * 100;
     const y = Math.random() * 100;
-    const tx = (Math.random() - 0.5) * 300 + 'px';
-    const ty = (Math.random() - 0.5) * 300 + 'px';
     const size = Math.random() * 8 + 3;
-    const delay = Math.random() * 0.5;
-    const colors = ['#C9A84C','#FFD700','#FFF8DC','#DAA520','#F5DEB3'];
     const color = colors[Math.floor(Math.random() * colors.length)];
+    const angle = Math.random() * 360;
+    const distance = Math.random() * 200 + 50;
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+    const delay = Math.random() * 400;
 
-    particle.style.cssText = `
+    p.style.cssText = `
       left:${x}%;
       top:${y}%;
       width:${size}px;
       height:${size}px;
       background:${color};
-      --tx:${tx};
-      --ty:${ty};
-      animation: glitterBurst 0.8s ease-out ${delay}s forwards;
-      box-shadow: 0 0 ${size*2}px ${color};
+      box-shadow:0 0 ${size*2}px ${color};
+      animation:glitterMove 0.9s ease-out ${delay}ms forwards;
+      --tx:${tx}px;
+      --ty:${ty}px;
     `;
-    overlay.appendChild(particle);
+    overlay.appendChild(p);
   }
 
-  // Golden shimmer
-setTimeout(() => {
-    overlay.style.background = 'rgba(201,168,76,0.15)';
+  // Add keyframes dynamically
+  if(!document.getElementById('glitter-keyframes')){
+    const style = document.createElement('style');
+    style.id = 'glitter-keyframes';
+    style.textContent = `
+      @keyframes glitterMove{
+        0%{transform:translate(0,0) scale(1);opacity:1;}
+        100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0;}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Gold shimmer
+  setTimeout(() => {
+    overlay.style.background = 'rgba(201,168,76,0.12)';
     overlay.style.transition = 'background 0.3s ease';
-  }, 400);
+  }, 500);
 
-// THIS LINE FIXES THE GLITCH → clears overlay before leaving
-setTimeout(() => {
+  // FIXED: Clear overlay completely before navigation
+  setTimeout(() => {
     overlay.style.opacity = '0';
-    overlay.style.background = 'rgba(0,0,0,0)';
+    overlay.style.background = 'transparent';
     overlay.innerHTML = '';
-  }, 1000);
+  }, 950);
+}
 
 // ============================================
-// GO TO PRODUCT PAGE WITH GLITTER
+// GO TO PRODUCT — URL PARAMETERS (WORKS ON PHONE!)
 // ============================================
-function goToProduct(image, name, price, fabric, occasion, description){
-  // Start glitter animation
+function goToProduct(image, ext, name, price, fabric, occasion, description){
+  // Start glitter
   createGlitter();
 
-  // Navigate using URL parameters (works on ALL devices including phone)
+  // Navigate using URL params after animation
   setTimeout(() => {
     const params = new URLSearchParams({
       image: image,
+      ext: ext,
       name: name,
       price: price,
       fabric: fabric,
@@ -975,18 +1045,26 @@ function goToProduct(image, name, price, fabric, occasion, description){
 }
 
 // ============================================
+// MOBILE TOUCH SUPPORT FOR HOVER EFFECTS
+// ============================================
+document.querySelectorAll('.product-card, .suit-card-small, .suit-card-tall, .fabric-card').forEach(card => {
+  card.addEventListener('touchstart', function(){
+    // Remove touched from all other cards
+    document.querySelectorAll('.touched').forEach(c => c.classList.remove('touched'));
+    this.classList.add('touched');
+  }, {passive:true});
+});
+
+// ============================================
 // SCROLL ANIMATIONS
 // ============================================
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
+    if(entry.isIntersecting) entry.target.classList.add('visible');
   });
-}, {threshold: 0.1});
+}, {threshold:0.1});
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
