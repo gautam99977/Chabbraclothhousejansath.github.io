@@ -300,10 +300,54 @@ nav{
 // ============================================
 window.addEventListener('load', function(){
 
-  // Get product data passed from homepage
-  const data = JSON.parse(localStorage.getItem('currentProduct'));
+  // GET DATA FROM URL (works on phone & computer both!)
+  const params = new URLSearchParams(window.location.search);
 
-  if(data){
+  const data = {
+    image: params.get('image'),
+    name: params.get('name'),
+    price: params.get('price'),
+    fabric: params.get('fabric'),
+    occasion: params.get('occasion'),
+    description: params.get('description')
+  };
+
+  if(data.name){
+    // SET PRODUCT IMAGE
+    // CHANGE IMAGE PATH HERE if images folder changes
+    document.getElementById('productImage').src = 'images/' + data.image + '.png';
+
+    // Handle jpg images
+    document.getElementById('productImage').onerror = function(){
+      this.src = 'images/' + data.image + '.jpg';
+    };
+
+    // SET PRODUCT DETAILS
+    document.getElementById('productName').textContent = data.name;
+    document.getElementById('productPrice').textContent = data.price;
+    document.getElementById('productFabric').textContent = data.fabric;
+    document.getElementById('productOccasion').textContent = data.occasion;
+    document.getElementById('productDescription').textContent = data.description;
+
+    // Set category based on image name
+    let category = 'Collection';
+    if(data.image.includes('duppata')) category = 'Dupatta Collection';
+    else if(data.image.includes('suit')) category = 'Suits Collection';
+    else if(data.image.includes('fabric') || data.image.includes('grey') ||
+            data.image.includes('yellow') || data.image.includes('red'))
+      category = 'Fabric Collection';
+    document.getElementById('productCategory').textContent = category;
+
+    // SET WHATSAPP MESSAGE
+    // CHANGE WHATSAPP NUMBER HERE → replace 919286175004
+    const phone = '919286175004';
+    // CHANGE MESSAGE FORMAT HERE
+    const message = `I love this ${data.name} 💛%0APrice: ${data.price}%0AFrom: Chhabra Cloth House%0APlease confirm my order.`;
+    document.getElementById('whatsappBtn').onclick = function(){
+      window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+    };
+  }
+});
     // SET PRODUCT IMAGE
     // CHANGE IMAGE PATH HERE if images folder changes
     document.getElementById('productImage').src = 'images/' + data.image + '.png';
