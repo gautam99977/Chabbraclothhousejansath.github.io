@@ -735,7 +735,7 @@ footer{
 
     <!-- CHANGE SUITS1 PHOTO HERE → replace suits1.png -->
     <div class="suit-card-small" onclick="goToProduct('suits1','Designer Suit','₹XXX','Georgette','Party & Wedding','Premium designer suit with modern cut.')">
-      <img src="images/suits1.png" alt="Suit"/>
+      <img src="images/new model.png" alt="Suit"/>
       <div class="card-overlay">
         <button class="know-details-btn">know details</button>
       </div>
@@ -941,11 +941,17 @@ function createGlitter(){
   }
 
   // Golden shimmer
-  setTimeout(() => {
+setTimeout(() => {
     overlay.style.background = 'rgba(201,168,76,0.15)';
     overlay.style.transition = 'background 0.3s ease';
   }, 400);
-}
+
+// THIS LINE FIXES THE GLITCH → clears overlay before leaving
+setTimeout(() => {
+    overlay.style.opacity = '0';
+    overlay.style.background = 'rgba(0,0,0,0)';
+    overlay.innerHTML = '';
+  }, 1000);
 
 // ============================================
 // GO TO PRODUCT PAGE WITH GLITTER
