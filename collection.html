@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Collection | Chhabra Cloth House</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;background:#000;color:#e8dcc8;overflow-x:hidden;animation:pageIn 0.6s ease both;}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* CARD STAGGER ANIMATION */
+@keyframes cardIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.stagger{animation:cardIn 0.5s ease both;}
+
+nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 25px;border-bottom:0.5px solid rgba(201,168,76,0.12);
+  background:rgba(0,0,0,0.95);backdrop-filter:blur(8px);
+  position:sticky;top:0;z-index:200;
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:#e8dcc8;text-transform:lowercase;}
+.back-btn{
+  background:transparent;border:0.5px solid rgba(201,168,76,0.3);
+  color:#C9A84C;padding:7px 16px;font-size:9px;letter-spacing:2px;
+  text-transform:uppercase;cursor:pointer;
+  font-family:'Montserrat',sans-serif;transition:all 0.3s;
+  text-decoration:none;display:inline-block;
+}
+.back-btn:hover{background:#C9A84C;color:#000;}
+
+/* ========== STICKY TABS ========== */
+.sticky-tabs{
+  position:sticky;top:57px;z-index:100;
+  background:#0a0a0a;
+  border-bottom:0.5px solid #C9A84C;
+  display:flex;
+}
+.tab-btn{
+  flex:1;padding:12px 8px;
+  background:transparent;border:none;
+  font-size:9px;letter-spacing:3px;color:#555;
+  text-transform:uppercase;cursor:pointer;
+  font-family:'Montserrat',sans-serif;
+  border-bottom:2px solid transparent;
+  transition:all 0.3s;
+}
+.tab-btn.active{color:#C9A84C;border-bottom:2px solid #C9A84C;}
+.tab-btn:hover{color:#e8dcc8;}
+
+/* ========== TAB PANELS ========== */
+.tab-panel{display:none;padding:20px 15px 60px;}
+.tab-panel.active{display:block;}
+
+/* ========== SECTION TITLE ========== */
+.sec-ttl{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:300;color:#e8dcc8;
+  font-style:italic;text-align:center;
+  margin-bottom:8px;
+}
+.sec-line{width:40px;height:1px;background:#C9A84C;opacity:0.4;margin:0 auto 20px;}
+
+/* ========== CATEGORY CIRCLES ========== */
+.circles-label{font-size:7px;letter-spacing:3px;color:#555;text-transform:uppercase;margin-bottom:10px;padding-left:2px;}
+.circles-scroll{overflow-x:auto;scrollbar-width:none;margin-bottom:20px;}
+.circles-scroll::-webkit-scrollbar{display:none;}
+.circles-row{display:flex;gap:12px;width:max-content;padding-bottom:4px;}
+.circle-item{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;flex-shrink:0;}
+.circle-img{
+  width:52px;height:52px;border-radius:50%;
+  background:#111;border:1.5px solid #222;
+  overflow:hidden;transition:border-color 0.3s,box-shadow 0.3s;
+  display:flex;align-items:center;justify-content:center;
+}
+/* ========== CHANGE CIRCLE PHOTOS HERE — replace src in each circle ========== */
+.circle-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.circle-item.active .circle-img,
+.circle-item:hover .circle-img{
+  border-color:#C9A84C;
+  box-shadow:0 0 10px rgba(201,168,76,0.2);
+}
+.circle-label{font-size:9px;color:#555;text-align:center;letter-spacing:0.5px;transition:color 0.3s;max-width:60px;word-break:break-word;line-height:1.2;}
+.circle-item.active .circle-label,
+.circle-item:hover .circle-label{color:#C9A84C;}
+
+/* ========== SWIPE ROWS PER CATEGORY ========== */
+.cat-section{margin-bottom:28px;}
+.cat-section-title{font-size:8px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:10px;}
+.cat-row-scroll{overflow-x:auto;scrollbar-width:none;}
+.cat-row-scroll::-webkit-scrollbar{display:none;}
+.cat-row{display:flex;gap:8px;width:max-content;}
+
+/* ========== SUITS GRID (same as homepage) ========== */
+.suits-all-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+  margin-bottom:20px;
+}
+.sa-card{
+  background:#0a0a0a;border-radius:3px;overflow:hidden;
+  cursor:pointer;border:0.5px solid #1a1a1a;
+  transition:border-color 0.3s;
+}
+.sa-card:hover,.sa-card.active{border-color:#C9A84C;}
+.sa-card img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block;}
+.sa-card-info{padding:6px;}
+.sa-card-name{font-family:'Cormorant Garamond',serif;font-size:10px;color:#e8dcc8;font-style:italic;margin-bottom:2px;}
+.sa-card-price{font-size:9px;color:#C9A84C;margin-bottom:4px;}
+.sa-card-btn{
+  width:100%;padding:4px;background:#C9A84C;border:none;
+  color:#000;font-size:7px;letter-spacing:1px;cursor:pointer;
+  font-family:'Montserrat',sans-serif;font-weight:500;
+}
+
+/* ========== PRODUCT CARDS IN SWIPE ROW ========== */
+.p-card{
+  width:140px;flex-shrink:0;
+  background:#0a0a0a;border-radius:3px;overflow:hidden;
+  cursor:pointer;border:0.5px solid #1a1a1a;
+  transition:border-color 0.3s;
+}
+.p-card:hover,.p-card.active{border-color:#C9A84C;}
+.p-card img{width:100%;height:170px;object-fit:cover;object-position:top;display:block;}
+.p-card-info{padding:8px;}
+.p-card-name{font-family:'Cormorant Garamond',serif;font-size:12px;color:#e8dcc8;font-style:italic;margin-bottom:2px;}
+.p-card-price{font-size:10px;color:#C9A84C;margin-bottom:5px;}
+.p-card-btns{display:flex;gap:3px;}
+.p-btn-d{flex:1;padding:4px;border:0.5px solid #2a2a2a;background:transparent;color:#666;font-size:7px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.3s;}
+.p-btn-d:hover{border-color:#e8dcc8;color:#e8dcc8;}
+.p-btn-s{flex:1;padding:4px;border:none;background:#C9A84C;color:#000;font-size:7px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;}
+
+/* corner bracket */
+.bracket-wrap{position:relative;}
+.bracket-wrap::before,.bracket-wrap::after{content:'';position:absolute;width:10px;height:10px;opacity:0;transition:opacity 0.3s;z-index:10;}
+.bracket-wrap::before{top:3px;left:3px;border-top:1px solid #C9A84C;border-left:1px solid #C9A84C;}
+.bracket-wrap::after{top:3px;right:3px;border-top:1px solid #C9A84C;border-right:1px solid #C9A84C;}
+.bracket-wrap:hover::before,.bracket-wrap:hover::after,.bracket-wrap.active::before,.bracket-wrap.active::after{opacity:1;}
+
+.swipe-hint{font-size:8px;color:#2a2a2a;letter-spacing:2px;text-align:center;margin-top:6px;}
+
+/* ========== FOOTER ========== */
+.coll-footer{background:#000;border-top:0.5px solid rgba(201,168,76,0.1);padding:30px 25px;}
+.cf-brand{font-family:'Cormorant Garamond',serif;font-size:18px;color:#e8dcc8;font-style:italic;margin-bottom:3px;}
+.cf-tag{font-size:7px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:16px;}
+.cf-txt{font-size:11px;color:rgba(232,220,200,0.4);line-height:1.9;margin-bottom:12px;}
+.cf-map{display:inline-block;padding:7px 16px;border:0.5px solid rgba(201,168,76,0.3);color:#C9A84C;font-size:8px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all 0.3s;margin-bottom:16px;}
+.cf-map:hover{background:#C9A84C;color:#000;}
+.cf-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
+.cf-link{color:rgba(232,220,200,0.4);text-decoration:none;font-size:11px;transition:color 0.3s;}
+.cf-link:hover{color:#C9A84C;}
+.cf-bottom{border-top:0.5px solid rgba(232,220,200,0.05);padding-top:14px;text-align:center;font-size:8px;color:rgba(232,220,200,0.15);letter-spacing:1px;}
+
+@media(max-width:400px){
+  .suits-all-grid{grid-template-columns:repeat(3,1fr);}
+  .p-card{width:120px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav>
+  <div class="nav-logo">chhabra cloth house</div>
+  <a class="back-btn" href="index.html">← Back</a>
+</nav>
+
+<!-- ========== STICKY TABS ========== -->
+<div class="sticky-tabs">
+  <button class="tab-btn active" onclick="switchTab('suits',this)">Suits</button>
+  <button class="tab-btn" onclick="switchTab('dupatta',this)">Dupatta</button>
+  <button class="tab-btn" onclick="switchTab('fabric',this)">Fabric</button>
+</div>
+
+<!-- ==================== SUITS TAB ==================== -->
+<div class="tab-panel active" id="tab-suits">
+  <div style="text-align:center;padding:20px 0 16px;">
+    <div class="sec-ttl">All Suits</div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="suits-all-grid" id="suits-grid">
+
+    <!-- ========== CHANGE SUIT PHOTOS & DETAILS HERE ========== -->
+    <!-- EACH CARD: change image filename, name, price, fabric, occasion, description -->
+
+    <!-- ========== SUIT 1 — CHANGE PHOTO: suit1.png ========== -->
+    <div class="sa-card bracket-wrap stagger" style="animation-delay:0s" onclick="goToProduct('suit1','png','Embroidered Suit','₹XXX','Cotton Silk','Festive','Elegant embroidered suit with intricate handwork.')">
+      <img src="images/suit1.png" alt="Suit" onerror="this.style.background='#111';this.style.aspectRatio='3/4'"/>
+      <div class="sa-card-info">
+        <div class="sa-card-name">Embroidered Suit</div>
+        <div class="sa-card-price">₹XXX</div>
+        <button class="sa-card-btn">Shop</button>
+      </div>
+    </div>
+
+    <!-- ========== SUIT 2 — CHANGE PHOTO: suit2.png ========== -->
+    <div class="sa-card bracket-wrap stagger" style="animation-delay:0.05s" onclick="goToProduct('suit2','png','Classic Suit','₹XXX','Premium','All Occasions','Our signature timeless classic suit.')">
+      <img src="images/suit2.png" alt="Suit" onerror="this.style.background='#111';this.style.aspectRatio='3/4'"/>
+      <div class="sa-card-info">
+        <div class="sa-card-name">Classic Suit</div>
+        <div class="sa-card-price">₹XXX</div>
+        <button class="sa-card-btn">Shop</button>
+      </div>
+    </div>
+
+    <!-- ========== SUIT 3 — CHANGE PHOTO: suit3.png ========== -->
+    <div class="sa-card bracket-wrap stagger" style="animation-delay:0.1s" onclick="goToProduct('suit3','png','Printed Suit','₹XXX','Pure Cotton','Casual','Comfortable printed suit for everyday wear.')">
+      <img src="images/suit3.png" alt="Suit" onerror="this.style.background='#111';this.style.aspectRatio='3/4'"/>
+      <div class="sa-card-info">
+        <div class="sa-card-name">Printed Suit</div>
+        <div class="sa-card-price">₹XXX</div>
+        <button class="sa-card-btn">Shop</button>
+      </div>
+    </div>
+
+    <!-- ========== SUIT 4 — CHANGE PHOTO: suit4.png ========== -->
+    <div class="sa-card bracket-wrap stagger" style="animation-delay:0.15s" onclick="goToProduct('suit4','png','Designer Suit','₹XXX','Georgette','Party','Modern designer suit with premium fabric.')">
+      <img src="images/suit4.png" alt="Suit" onerror="this.style.background='#111';this.style.aspectRatio='3/4'"/>
+      <div class="sa-card-info">
+        <div class="sa-card-name">Designer Suit</div>
+        <div class="sa-card-price">₹XXX</div>
+        <button class="sa-card-btn">Shop</button>
+      </div>
+    </div>
+
+    <!-- ========== SUIT 5 — CHANGE PHOTO: new model.png ========== -->
+    <div class="sa-card bracket-wrap stagger" style="animation-delay:0.2s" onclick="goToProduct('new model','png','New Model Suit','₹XXX','Silk Blend','Wedding','Latest new model with exclusive design.')">
+      <img src="images/new model.png" alt="Suit" onerror="this.style.background='#111';this.style.aspectRatio='3/4'"/>
+      <div class="sa-card-info">
+        <div class="sa-card-name">New Model Suit</div>
+        <div class="sa-card-price">₹XXX</div>
+        <button class="sa-card-btn">Shop</button>
+      </div>
+    </div>
+
+    <!-- ========== SUITS 6-20: ADD MORE SUIT PHOTOS HERE ========== -->
+    <!-- Copy the block above and change: photo filename, name, price, fabric, occasion, description -->
+    <!-- Example for suit 6: -->
+    <!-- <div class="sa-card bracket-wrap stagger" style="animation-delay:0.25s" onclick="goToProduct('suit6','png','Suit Name','₹XXX','Fabric','Occasion','Description')">
+      <img src="images/suit6.png" alt="Suit 6" onerror="this.style.background='#111';this.style.aspectRatio='3/4'"/>
+      <div class="sa-card-info">
+        <div class="sa-card-name">Suit Name</div>
+        <div class="sa-card-price">₹XXX</div>
+        <button class="sa-card-btn">Shop</button>
+      </div>
+    </div> -->
+
+  </div>
+</div>
+
+<!-- ==================== DUPATTA TAB ==================== -->
+<div class="tab-panel" id="tab-dupatta">
+  <div style="text-align:center;padding:20px 0 16px;">
+    <div class="sec-ttl">Dupatta Collection</div>
+    <div class="sec-line"></div>
+  </div>
+
+  <!-- ========== DUPATTA CATEGORY CIRCLES ========== -->
+  <!-- ========== CHANGE CIRCLE NAMES & PHOTOS HERE ========== -->
+  <div class="circles-label">Select variety</div>
+  <div class="circles-scroll">
+    <div class="circles-row" id="dup-circles">
+
+      <!-- ========== CIRCLE A — Cotton Dupatta ========== -->
+      <!-- ========== CHANGE CIRCLE PHOTO: replace duppata1.png ========== -->
+      <div class="circle-item active" onclick="scrollToDupSection('dup-cotton',this)">
+        <div class="circle-img"><img src="images/duppata1.png" alt="Cotton" onerror="this.parentElement.style.background='#1a1a1a'"/></div>
+        <div class="circle-label">Cotton</div>
+      </div>
+
+      <!-- ========== CIRCLE B — Semar Dupatta ========== -->
+      <!-- ========== CHANGE CIRCLE PHOTO: replace duppata2.png ========== -->
+      <div class="circle-item" onclick="scrollToDupSection('dup-semar',this)">
+        <div class="circle-img"><img src="images/duppata2.png" alt="Semar" onerror="this.parentElement.style.background='#1a1a1a'"/></div>
+        <div class="circle-label">Semar</div>
+      </div>
+
+      <!-- ========== CIRCLE C — Banarsi Dupatta ========== -->
+      <!-- ========== CHANGE CIRCLE PHOTO: replace duppata3.png ========== -->
+      <div class="circle-item" onclick="scrollToDupSection('dup-banarsi',this)">
+        <div class="circle-img"><img src="images/duppata3.png" alt="Banarsi" onerror="this.parentElement.style.background='#1a1a1a'"/></div>
+        <div class="circle-label">Banarsi</div>
+      </div>
+
+      <!-- ========== CIRCLE D — Organza Dupatta ========== -->
+      <!-- ========== CHANGE CIRCLE PHOTO: replace duppata4.png ========== -->
+      <div class="circle-item" onclick="scrollToDupSection('dup-organza',this)">
+        <div class="circle-img"><img src="images/duppata4.png" alt="Organza" onerror="this.parentElement.style.background='#1a1a1a'"/></div>
+        <div class="circle-label">Organza</div>
+      </div>
+
+      <!-- ========== CIRCLE E — Siffon ========== -->
+      <!-- ========== CHANGE CIRCLE PHOTO: replace with siffon photo ========== -->
+      <div class="circle-item" onclick="scrollToDupSection('dup-siffon',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Siffon</div>
+      </div>
+
+      <!-- ========== CIRCLE F — Stall ========== -->
+      <div class="circle-item" onclick="scrollToDupSection('dup-stall',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Stall</div>
+      </div>
+
+      <!-- ========== CIRCLE G — Plain Dupatta ========== -->
+      <div class="circle-item" onclick="scrollToDupSection('dup-plain',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Plain</div>
+      </div>
+
+      <!-- ========== CIRCLE H — Plain Print ========== -->
+      <div class="circle-item" onclick="scrollToDupSection('dup-plainprint',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Plain Print</div>
+      </div>
+
+      <!-- ========== CIRCLE I — Phulkari ========== -->
+      <div class="circle-item" onclick="scrollToDupSection('dup-phulkari',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Phulkari</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== COTTON DUPATTA ROW ========== -->
+  <div class="cat-section" id="dup-cotton">
+    <div class="cat-section-title">Cotton Dupatta</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <!-- ========== CHANGE PHOTOS FOR COTTON DUPATTA — 10 cards ========== -->
+      <!-- ========== CARD 1: change duppata1.png and details ========== -->
+      <div class="p-card bracket-wrap" onclick="goToProduct('duppata1','png','Cotton Dupatta','₹XXX','Pure Cotton','Casual','Soft cotton dupatta for everyday wear.')">
+        <img src="images/duppata1.png" alt="Cotton Dupatta" onerror="this.style.background='#111';this.style.height='170px'"/>
+        <div class="p-card-info">
+          <div class="p-card-name">Cotton Dupatta</div>
+          <div class="p-card-price">₹XXX</div>
+          <div class="p-card-btns">
+            <button class="p-btn-d" onclick="event.stopPropagation();goToProduct('duppata1','png','Cotton Dupatta','₹XXX','Pure Cotton','Casual','Soft cotton dupatta.')">Details</button>
+            <button class="p-btn-s" onclick="event.stopPropagation();goToProduct('duppata1','png','Cotton Dupatta','₹XXX','Pure Cotton','Casual','Soft cotton dupatta.')">Shop</button>
+          </div>
+        </div>
+      </div>
+      <!-- ========== ADD 9 MORE COTTON DUPATTA CARDS BELOW ========== -->
+      <!-- Copy the card block above 9 times with different photos/details -->
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== SEMAR DUPATTA ROW ========== -->
+  <div class="cat-section" id="dup-semar">
+    <div class="cat-section-title">Semar Dupatta</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <!-- ========== CHANGE PHOTOS FOR SEMAR DUPATTA ========== -->
+      <div class="p-card bracket-wrap" onclick="goToProduct('duppata2','png','Semar Dupatta','₹XXX','Semar','Festive','Elegant semar dupatta.')">
+        <img src="images/duppata2.png" alt="Semar Dupatta" onerror="this.style.background='#111';this.style.height='170px'"/>
+        <div class="p-card-info">
+          <div class="p-card-name">Semar Dupatta</div>
+          <div class="p-card-price">₹XXX</div>
+          <div class="p-card-btns">
+            <button class="p-btn-d" onclick="event.stopPropagation();goToProduct('duppata2','png','Semar Dupatta','₹XXX','Semar','Festive','Elegant semar dupatta.')">Details</button>
+            <button class="p-btn-s" onclick="event.stopPropagation();goToProduct('duppata2','png','Semar Dupatta','₹XXX','Semar','Festive','Elegant semar dupatta.')">Shop</button>
+          </div>
+        </div>
+      </div>
+      <!-- ========== ADD MORE SEMAR CARDS HERE ========== -->
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== BANARSI DUPATTA ROW ========== -->
+  <div class="cat-section" id="dup-banarsi">
+    <div class="cat-section-title">Banarsi Dupatta</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <!-- ========== CHANGE PHOTOS FOR BANARSI DUPATTA ========== -->
+      <div class="p-card bracket-wrap" onclick="goToProduct('duppata3','png','Banarsi Dupatta','₹XXX','Banarsi Silk','Wedding','Rich banarsi dupatta with golden border.')">
+        <img src="images/duppata3.png" alt="Banarsi" onerror="this.style.background='#111';this.style.height='170px'"/>
+        <div class="p-card-info">
+          <div class="p-card-name">Banarsi Dupatta</div>
+          <div class="p-card-price">₹XXX</div>
+          <div class="p-card-btns">
+            <button class="p-btn-d" onclick="event.stopPropagation();goToProduct('duppata3','png','Banarsi Dupatta','₹XXX','Banarsi Silk','Wedding','Rich banarsi dupatta.')">Details</button>
+            <button class="p-btn-s" onclick="event.stopPropagation();goToProduct('duppata3','png','Banarsi Dupatta','₹XXX','Banarsi Silk','Wedding','Rich banarsi dupatta.')">Shop</button>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== ORGANZA DUPATTA ROW ========== -->
+  <div class="cat-section" id="dup-organza">
+    <div class="cat-section-title">Organza Dupatta</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <div class="p-card bracket-wrap" onclick="goToProduct('duppata4','png','Organza Dupatta','₹XXX','Organza','Party','Light sheer organza dupatta.')">
+        <img src="images/duppata4.png" alt="Organza" onerror="this.style.background='#111';this.style.height='170px'"/>
+        <div class="p-card-info">
+          <div class="p-card-name">Organza Dupatta</div>
+          <div class="p-card-price">₹XXX</div>
+          <div class="p-card-btns">
+            <button class="p-btn-d" onclick="event.stopPropagation();goToProduct('duppata4','png','Organza Dupatta','₹XXX','Organza','Party','Light sheer organza.')">Details</button>
+            <button class="p-btn-s" onclick="event.stopPropagation();goToProduct('duppata4','png','Organza Dupatta','₹XXX','Organza','Party','Light sheer organza.')">Shop</button>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== SIFFON ROW ========== -->
+  <div class="cat-section" id="dup-siffon">
+    <div class="cat-section-title">Siffon Dupatta</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <!-- ========== ADD SIFFON DUPATTA PHOTOS HERE ========== -->
+      <!-- ========== CHANGE PHOTO: replace with siffon photo filename ========== -->
+      <div class="p-card bracket-wrap" onclick="goToProduct('duppata1','png','Siffon Dupatta','₹XXX','Siffon','All Occasions','Elegant siffon dupatta with smooth finish.')">
+        <div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;letter-spacing:1px;">Photo coming soon</span></div>
+        <div class="p-card-info">
+          <div class="p-card-name">Siffon Dupatta</div>
+          <div class="p-card-price">₹XXX</div>
+          <div class="p-card-btns">
+            <button class="p-btn-d">Details</button>
+            <button class="p-btn-s">Shop</button>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== STALL ROW ========== -->
+  <div class="cat-section" id="dup-stall">
+    <div class="cat-section-title">Stall</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <!-- ========== ADD STALL PHOTOS HERE ========== -->
+      <div class="p-card bracket-wrap">
+        <div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;letter-spacing:1px;">Photo coming soon</span></div>
+        <div class="p-card-info">
+          <div class="p-card-name">Stall</div>
+          <div class="p-card-price">₹XXX</div>
+          <div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div>
+        </div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== PLAIN DUPATTA ROW ========== -->
+  <div class="cat-section" id="dup-plain">
+    <div class="cat-section-title">Plain Dupatta</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <div class="p-card bracket-wrap">
+        <div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;letter-spacing:1px;">Photo coming soon</span></div>
+        <div class="p-card-info">
+          <div class="p-card-name">Plain Dupatta</div>
+          <div class="p-card-price">₹XXX</div>
+          <div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div>
+        </div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== PLAIN PRINT DUPATTA ROW ========== -->
+  <div class="cat-section" id="dup-plainprint">
+    <div class="cat-section-title">Plain Print Dupatta</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <div class="p-card bracket-wrap">
+        <div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;letter-spacing:1px;">Photo coming soon</span></div>
+        <div class="p-card-info">
+          <div class="p-card-name">Plain Print Dupatta</div>
+          <div class="p-card-price">₹XXX</div>
+          <div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div>
+        </div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== PHULKARI DUPATTA ROW ========== -->
+  <div class="cat-section" id="dup-phulkari">
+    <div class="cat-section-title">Phulkari Dupatta</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <div class="p-card bracket-wrap">
+        <div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;letter-spacing:1px;">Photo coming soon</span></div>
+        <div class="p-card-info">
+          <div class="p-card-name">Phulkari Dupatta</div>
+          <div class="p-card-price">₹XXX</div>
+          <div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div>
+        </div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+</div>
+
+<!-- ==================== FABRIC TAB ==================== -->
+<div class="tab-panel" id="tab-fabric">
+  <div style="text-align:center;padding:20px 0 16px;">
+    <div class="sec-ttl">Fabric Collection</div>
+    <div class="sec-line"></div>
+  </div>
+
+  <!-- ========== FABRIC CATEGORY CIRCLES ========== -->
+  <!-- ========== CHANGE CIRCLE NAMES & PHOTOS HERE ========== -->
+  <div class="circles-label">Select fabric</div>
+  <div class="circles-scroll">
+    <div class="circles-row" id="fab-circles">
+
+      <!-- ========== CIRCLE 1 — Astar ========== -->
+      <div class="circle-item active" onclick="scrollToFabSection('fab-astar',this)">
+        <div class="circle-img"><img src="images/grey.jpg" alt="Astar" onerror="this.parentElement.style.background='#1a1a1a'"/></div>
+        <div class="circle-label">Astar</div>
+      </div>
+
+      <!-- ========== CIRCLE 2 — Fandy Silk ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-fandy',this)">
+        <div class="circle-img"><img src="images/yellow.png" alt="Fandy" onerror="this.parentElement.style.background='#1a1a1a'"/></div>
+        <div class="circle-label">Fandy Silk</div>
+      </div>
+
+      <!-- ========== CIRCLE 3 — Semar ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-semar',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Semar</div>
+      </div>
+
+      <!-- ========== CIRCLE 4 — Sattan ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-sattan',this)">
+        <div class="circle-img"><img src="images/red.png" alt="Sattan" onerror="this.parentElement.style.background='#1a1a1a'"/></div>
+        <div class="circle-label">Sattan</div>
+      </div>
+
+      <!-- ========== CIRCLE 5 — Japani Silk ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-japani',this)">
+        <div class="circle-img"><img src="images/fabric3.jpg" alt="Japani" onerror="this.parentElement.style.background='#1a1a1a'"/></div>
+        <div class="circle-label">Japani Silk</div>
+      </div>
+
+      <!-- ========== CIRCLE 6 — Ryon ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-ryon',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Ryon</div>
+      </div>
+
+      <!-- ========== CIRCLE 7 — Valvet ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-valvet',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Valvet</div>
+      </div>
+
+      <!-- ========== CIRCLE 8 — Fandy Border ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-fandyborder',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Fandy Border</div>
+      </div>
+
+      <!-- ========== CIRCLE 9 — Fandy All Over ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-fandyallover',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Fandy All Over</div>
+      </div>
+
+      <!-- ========== CIRCLE 10 — Ryon Print ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-ryonprint',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Ryon Print</div>
+      </div>
+
+      <!-- ========== CIRCLE 11 — Cotton Print ========== -->
+      <div class="circle-item" onclick="scrollToFabSection('fab-cottonprint',this)">
+        <div class="circle-img" style="background:#1a1a1a;"></div>
+        <div class="circle-label">Cotton Print</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== ASTAR ROW ========== -->
+  <div class="cat-section" id="fab-astar">
+    <div class="cat-section-title">Astar Fabric</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <!-- ========== ADD 10 ASTAR FABRIC PHOTOS HERE ========== -->
+      <!-- ========== CHANGE PHOTO: replace grey.jpg ========== -->
+      <div class="p-card bracket-wrap" onclick="goToProduct('grey','jpg','Astar Fabric','₹XXX per meter','Astar','All Occasions','Premium quality astar fabric, smooth and durable.')">
+        <img src="images/grey.jpg" alt="Astar" onerror="this.style.background='#111';this.style.height='170px'"/>
+        <div class="p-card-info">
+          <div class="p-card-name">Astar Fabric</div>
+          <div class="p-card-price">₹XXX/m</div>
+          <div class="p-card-btns">
+            <button class="p-btn-d" onclick="event.stopPropagation();goToProduct('grey','jpg','Astar Fabric','₹XXX per meter','Astar','All Occasions','Premium astar fabric.')">Details</button>
+            <button class="p-btn-s" onclick="event.stopPropagation();goToProduct('grey','jpg','Astar Fabric','₹XXX per meter','Astar','All Occasions','Premium astar fabric.')">Shop</button>
+          </div>
+        </div>
+      </div>
+      <!-- ========== ADD 9 MORE ASTAR CARDS BELOW ========== -->
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== FANDY SILK ROW ========== -->
+  <div class="cat-section" id="fab-fandy">
+    <div class="cat-section-title">Fandy Silk</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <div class="p-card bracket-wrap" onclick="goToProduct('yellow','png','Fandy Silk','₹XXX per meter','Fandy Silk','Festive','Beautiful fandy silk with natural sheen.')">
+        <img src="images/yellow.png" alt="Fandy Silk" onerror="this.style.background='#111';this.style.height='170px'"/>
+        <div class="p-card-info">
+          <div class="p-card-name">Fandy Silk</div>
+          <div class="p-card-price">₹XXX/m</div>
+          <div class="p-card-btns">
+            <button class="p-btn-d" onclick="event.stopPropagation();goToProduct('yellow','png','Fandy Silk','₹XXX per meter','Fandy Silk','Festive','Fandy silk.')">Details</button>
+            <button class="p-btn-s" onclick="event.stopPropagation();goToProduct('yellow','png','Fandy Silk','₹XXX per meter','Fandy Silk','Festive','Fandy silk.')">Shop</button>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== SEMAR FABRIC ROW ========== -->
+  <div class="cat-section" id="fab-semar">
+    <div class="cat-section-title">Semar Fabric</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <!-- ========== ADD SEMAR FABRIC PHOTOS HERE ========== -->
+      <div class="p-card bracket-wrap">
+        <div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;">Photo coming soon</span></div>
+        <div class="p-card-info"><div class="p-card-name">Semar Fabric</div><div class="p-card-price">₹XXX/m</div><div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div></div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== SATTAN ROW ========== -->
+  <div class="cat-section" id="fab-sattan">
+    <div class="cat-section-title">Sattan Fabric</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <div class="p-card bracket-wrap" onclick="goToProduct('red','png','Sattan Fabric','₹XXX per meter','Sattan','Wedding','Luxurious sattan fabric.')">
+        <img src="images/red.png" alt="Sattan" onerror="this.style.background='#111';this.style.height='170px'"/>
+        <div class="p-card-info"><div class="p-card-name">Sattan Fabric</div><div class="p-card-price">₹XXX/m</div><div class="p-card-btns"><button class="p-btn-d" onclick="event.stopPropagation();goToProduct('red','png','Sattan Fabric','₹XXX per meter','Sattan','Wedding','Sattan fabric.')">Details</button><button class="p-btn-s" onclick="event.stopPropagation();goToProduct('red','png','Sattan Fabric','₹XXX per meter','Sattan','Wedding','Sattan fabric.')">Shop</button></div></div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== JAPANI SILK ROW ========== -->
+  <div class="cat-section" id="fab-japani">
+    <div class="cat-section-title">Japani Silk</div>
+    <div class="cat-row-scroll"><div class="cat-row">
+      <div class="p-card bracket-wrap" onclick="goToProduct('fabric3','jpg','Japani Silk','₹XXX per meter','Japani Silk','All Occasions','Premium japanese silk.')">
+        <img src="images/fabric3.jpg" alt="Japani Silk" onerror="this.style.background='#111';this.style.height='170px'"/>
+        <div class="p-card-info"><div class="p-card-name">Japani Silk</div><div class="p-card-price">₹XXX/m</div><div class="p-card-btns"><button class="p-btn-d" onclick="event.stopPropagation();goToProduct('fabric3','jpg','Japani Silk','₹XXX per meter','Japani Silk','All','Japani silk.')">Details</button><button class="p-btn-s" onclick="event.stopPropagation();goToProduct('fabric3','jpg','Japani Silk','₹XXX per meter','Japani Silk','All','Japani silk.')">Shop</button></div></div>
+      </div>
+    </div></div>
+    <div class="swipe-hint">← swipe करें →</div>
+  </div>
+
+  <!-- ========== RYON, VALVET, FANDY BORDER, FANDY ALL OVER, RYON PRINT, COTTON PRINT ========== -->
+  <!-- ========== ADD PHOTOS FOR THESE WHEN AVAILABLE ========== -->
+  <div class="cat-section" id="fab-ryon"><div class="cat-section-title">Ryon Fabric</div><div class="cat-row-scroll"><div class="cat-row"><div class="p-card bracket-wrap"><div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;">Photo coming soon</span></div><div class="p-card-info"><div class="p-card-name">Ryon Fabric</div><div class="p-card-price">₹XXX/m</div><div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div></div></div></div></div><div class="swipe-hint">← swipe करें →</div></div>
+
+  <div class="cat-section" id="fab-valvet"><div class="cat-section-title">Valvet Fabric</div><div class="cat-row-scroll"><div class="cat-row"><div class="p-card bracket-wrap"><div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;">Photo coming soon</span></div><div class="p-card-info"><div class="p-card-name">Valvet Fabric</div><div class="p-card-price">₹XXX/m</div><div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div></div></div></div></div><div class="swipe-hint">← swipe करें →</div></div>
+
+  <div class="cat-section" id="fab-fandyborder"><div class="cat-section-title">Fandy Silk — Border Work</div><div class="cat-row-scroll"><div class="cat-row"><div class="p-card bracket-wrap"><div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;">Photo coming soon</span></div><div class="p-card-info"><div class="p-card-name">Fandy Border Work</div><div class="p-card-price">₹XXX/m</div><div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div></div></div></div></div><div class="swipe-hint">← swipe करें →</div></div>
+
+  <div class="cat-section" id="fab-fandyallover"><div class="cat-section-title">Fandy Silk — All Over Work</div><div class="cat-row-scroll"><div class="cat-row"><div class="p-card bracket-wrap"><div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;">Photo coming soon</span></div><div class="p-card-info"><div class="p-card-name">Fandy All Over Work</div><div class="p-card-price">₹XXX/m</div><div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div></div></div></div></div><div class="swipe-hint">← swipe करें →</div></div>
+
+  <div class="cat-section" id="fab-ryonprint"><div class="cat-section-title">Ryon Print</div><div class="cat-row-scroll"><div class="cat-row"><div class="p-card bracket-wrap"><div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;">Photo coming soon</span></div><div class="p-card-info"><div class="p-card-name">Ryon Print</div><div class="p-card-price">₹XXX/m</div><div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div></div></div></div></div><div class="swipe-hint">← swipe करें →</div></div>
+
+  <div class="cat-section" id="fab-cottonprint"><div class="cat-section-title">Cotton Print</div><div class="cat-row-scroll"><div class="cat-row"><div class="p-card bracket-wrap"><div style="height:170px;background:#111;width:140px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#333;">Photo coming soon</span></div><div class="p-card-info"><div class="p-card-name">Cotton Print</div><div class="p-card-price">₹XXX/m</div><div class="p-card-btns"><button class="p-btn-d">Details</button><button class="p-btn-s">Shop</button></div></div></div></div></div><div class="swipe-hint">← swipe करें →</div></div>
+
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="coll-footer">
+  <div class="cf-brand">Chhabra Cloth House</div>
+  <div class="cf-tag">fine fabrics & ladies suits</div>
+  <!-- ========== CHANGE ADDRESS HERE ========== -->
+  <div class="cf-txt">Chhabra Colony, Jansath, Muzaffarnagar, UP — 251314<br/>📞 +91 99977 39012</div>
+  <!-- ========== CHANGE MAP LINK HERE ========== -->
+  <a class="cf-map" href="https://maps.app.goo.gl/Byc9CWc4PjPcx67P6" target="_blank">Open in Maps →</a>
+  <div class="cf-links">
+    <!-- ========== CHANGE SOCIAL LINKS HERE ========== -->
+    <a class="cf-link" href="https://www.instagram.com/g_singh9012?igsh=dmRla2Q2OTBrcjFv" target="_blank">Instagram →</a>
+    <a class="cf-link" href="https://www.facebook.com/share/14fa2tdmQxk/" target="_blank">Facebook →</a>
+    <a class="cf-link" href="#" target="_blank">Twitter →</a>
+  </div>
+  <div class="cf-bottom">© 2026 Chhabra Cloth House. All Rights Reserved.</div>
+</div>
+
+<script>
+/* ==================== SWITCH TABS ==================== */
+function switchTab(tab,btn){
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('tab-'+tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ==================== SCROLL TO DUPATTA SECTION ON CIRCLE CLICK ==================== */
+function scrollToDupSection(id,el){
+  document.querySelectorAll('#dup-circles .circle-item').forEach(function(c){c.classList.remove('active');});
+  el.classList.add('active');
+  var sec=document.getElementById(id);
+  if(sec){
+    var stickyH=57+45;
+    var top=sec.getBoundingClientRect().top+window.pageYOffset-stickyH-10;
+    window.scrollTo({top:top,behavior:'smooth'});
+  }
+}
+
+/* ==================== SCROLL TO FABRIC SECTION ON CIRCLE CLICK ==================== */
+function scrollToFabSection(id,el){
+  document.querySelectorAll('#fab-circles .circle-item').forEach(function(c){c.classList.remove('active');});
+  el.classList.add('active');
+  var sec=document.getElementById(id);
+  if(sec){
+    var stickyH=57+45;
+    var top=sec.getBoundingClientRect().top+window.pageYOffset-stickyH-10;
+    window.scrollTo({top:top,behavior:'smooth'});
+  }
+}
+
+/* ==================== GO TO PRODUCT PAGE ==================== */
+function goToProduct(image,ext,name,price,fabric,occasion,description){
+  var p=new URLSearchParams({image:image,ext:ext,name:name,price:price,fabric:fabric,occasion:occasion,description:description});
+  window.location.href='product.html?'+p.toString();
+}
+
+/* ==================== OPEN TAB FROM URL ==================== */
+window.addEventListener('load',function(){
+  var params=new URLSearchParams(window.location.search);
+  var tab=params.get('tab');
+  if(tab==='dupatta'){
+    var btn=document.querySelectorAll('.tab-btn')[1];
+    switchTab('dupatta',btn);
+  } else if(tab==='fabric'){
+    var btn=document.querySelectorAll('.tab-btn')[2];
+    switchTab('fabric',btn);
+  }
+});
+
+/* ==================== MOBILE TOUCH FOR BRACKET ANIMATION ==================== */
+document.querySelectorAll('.bracket-wrap').forEach(function(c){
+  c.addEventListener('touchstart',function(){
+    document.querySelectorAll('.bracket-wrap.active').forEach(function(x){x.classList.remove('active');});
+    this.classList.add('active');
+  },{passive:true});
+});
+</script>
+</body>
+</html>
