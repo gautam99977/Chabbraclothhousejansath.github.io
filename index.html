@@ -4,1067 +4,686 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Chhabra Cloth House</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Montserrat',sans-serif;background:#000;color:#e8dcc8;overflow-x:hidden;}
 
-/* ============================================
-   WELCOME SCREEN ANIMATION
-   ============================================ */
 #welcome-screen{
-  position:fixed;
-  top:0;left:0;right:0;bottom:0;
-  background:#000;
-  z-index:99999;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:20px;
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:#000;z-index:99999;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:14px;
 }
-.welcome-line{
-  width:0;
-  height:1px;
-  background:#C9A84C;
-  transition:width 0.8s ease;
-}
-.welcome-cch{
-  font-family:'Cormorant Garamond',serif;
-  font-size:100px;
-  color:rgba(201,168,76,0.15);
-  letter-spacing:20px;
-  opacity:0;
-  transition:opacity 0.8s ease;
-  font-weight:300;
-}
-.welcome-name{
-  font-family:'Cormorant Garamond',serif;
-  font-size:32px;
-  color:#e8dcc8;
-  letter-spacing:8px;
-  font-style:italic;
-  opacity:0;
-  transition:opacity 0.8s ease;
-  font-weight:300;
-}
-.welcome-sub{
-  font-size:9px;
-  letter-spacing:6px;
-  color:#C9A84C;
-  text-transform:uppercase;
-  opacity:0;
-  transition:opacity 0.8s ease;
-}
-#welcome-screen.fade-out{
-  opacity:0;
-  transition:opacity 0.8s ease;
-  pointer-events:none;
-}
+.w-line{width:0;height:1px;background:#C9A84C;transition:width 1s ease;}
+.w-cch{font-family:'Cormorant Garamond',serif;font-size:72px;color:rgba(201,168,76,0.1);letter-spacing:14px;opacity:0;transition:opacity 0.8s ease;font-weight:300;}
+.w-name{font-family:'Cormorant Garamond',serif;font-size:26px;color:#e8dcc8;letter-spacing:6px;font-style:italic;opacity:0;transition:opacity 0.8s ease;}
+.w-sub{font-size:8px;letter-spacing:5px;color:#C9A84C;text-transform:uppercase;opacity:0;transition:opacity 0.8s ease;}
+#welcome-screen.out{opacity:0;transition:opacity 0.8s ease;pointer-events:none;}
 
-/* ============================================
-   NAVBAR
-   ============================================ */
 nav{
-  position:fixed;
-  top:0;left:0;right:0;
-  z-index:1000;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 50px;
-  background:rgba(0,0,0,0.85);
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 30px;
+  background:rgba(0,0,0,0.92);
   backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(201,168,76,0.15);
+  border-bottom:1px solid rgba(201,168,76,0.1);
 }
-.nav-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:18px;
-  letter-spacing:4px;
-  color:#e8dcc8;
-  text-transform:lowercase;
-  font-weight:300;
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:4px;color:#e8dcc8;text-transform:lowercase;font-weight:300;}
+/* ========== CHANGE WHATSAPP NUMBER HERE — replace 919997739012 ========== */
+.nav-wa{
+  display:flex;align-items:center;gap:6px;
+  background:transparent;border:1px solid rgba(201,168,76,0.4);
+  color:#C9A84C;padding:7px 16px;font-size:10px;
+  letter-spacing:2px;text-decoration:none;
+  font-family:'Montserrat',sans-serif;transition:all 0.3s ease;
 }
-.nav-whatsapp{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:transparent;
-  border:1px solid rgba(201,168,76,0.5);
-  color:#C9A84C;
-  padding:8px 20px;
-  font-size:11px;
-  letter-spacing:2px;
-  text-decoration:none;
-  font-family:'Montserrat',sans-serif;
-  transition:all 0.3s ease;
-}
-.nav-whatsapp:hover{background:#C9A84C;color:#000;}
+.nav-wa:hover{background:#C9A84C;color:#000;}
 
-/* ============================================
-   HERO SECTION
-   ============================================ */
 .hero{
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1fr 1.5fr;
-  background:#000;
-  padding-top:80px;
-  opacity:0;
-  transition:opacity 1s ease;
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  padding:100px 20px 60px;background:#000;
+  opacity:0;transition:opacity 1s ease;text-align:center;
 }
-.hero.visible{opacity:1;}
-.hero-left{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:flex-start;
-  padding:60px 40px 60px 60px;
-  position:relative;
-}
-/* CHANGE OWNER PHOTO HERE → replace owner.jpg */
+.hero.show{opacity:1;}
+.hero-topline{width:0;height:1px;background:#C9A84C;margin:0 auto 14px;transition:width 1.2s ease 0.2s;}
+.hero-topline.show{width:50px;}
+.hero-est{font-size:7px;letter-spacing:5px;color:#C9A84C;text-transform:uppercase;margin-bottom:18px;opacity:0;transition:opacity 0.8s ease 0.4s;}
+.hero-est.show{opacity:1;}
+/* ========== CHANGE OWNER PHOTO HERE — replace owner.jpg ========== */
 .owner-photo{
-  width:220px;
-  height:220px;
-  border-radius:50%;
-  object-fit:cover;
-  border:2px solid rgba(201,168,76,0.4);
-  margin-bottom:30px;
+  width:120px;height:120px;border-radius:50%;
+  object-fit:cover;object-position:top;
+  border:2px solid #C9A84C;
+  box-shadow:0 0 25px rgba(201,168,76,0.18);
+  margin-bottom:24px;
+  opacity:0;transition:opacity 0.8s ease 0.6s;
 }
-/* CHANGE BRAND LOGO HERE → replace BRAND.png */
+.owner-photo.show{opacity:1;}
+/* ========== CHANGE BRAND LOGO HERE — replace BRAND.png ========== */
 .brand-logo{
-  width:280px;
-  object-fit:contain;
-  filter:brightness(1.1);
+  width:240px;max-width:75vw;object-fit:contain;
+  margin-bottom:6px;
+  opacity:0;transition:opacity 0.8s ease 0.8s;
 }
-.hero-cch{
-  position:absolute;
-  left:-20px;
-  bottom:40px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:120px;
-  font-weight:300;
-  color:rgba(201,168,76,0.06);
-  letter-spacing:-5px;
-  line-height:1;
-  pointer-events:none;
-  user-select:none;
-}
-.hero-right{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:60px;
-  background:#0a0a0a;
-  position:relative;
-  overflow:hidden;
-}
-.hero-right::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;bottom:0;
-  background:radial-gradient(ellipse at center,rgba(201,168,76,0.04) 0%,transparent 70%);
-}
-.hero-tagline{
-  font-family:'Cormorant Garamond',serif;
-  font-size:58px;
-  font-weight:300;
-  color:#e8dcc8;
-  line-height:1.1;
-  text-align:center;
-  margin-bottom:15px;
-  font-style:italic;
-}
-.hero-sub{
-  font-size:10px;
-  letter-spacing:5px;
-  color:#C9A84C;
-  text-transform:uppercase;
-  margin-bottom:50px;
-}
+.brand-logo.show{opacity:1;}
+.hero-sub{font-size:7px;letter-spacing:4px;color:#C9A84C;text-transform:uppercase;margin-bottom:36px;opacity:0;transition:opacity 0.8s ease 1s;}
+.hero-sub.show{opacity:1;}
 .explore-btn{
-  border:1px solid rgba(232,220,200,0.4);
-  color:#e8dcc8;
-  padding:14px 50px;
-  font-size:11px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  background:transparent;
+  padding:13px 36px;background:#C9A84C;color:#000;
+  border:none;font-size:10px;letter-spacing:4px;
+  text-transform:uppercase;cursor:pointer;
+  font-family:'Montserrat',sans-serif;font-weight:500;
+  border-radius:2px;transition:all 0.3s ease;
+  opacity:0;transition:opacity 0.8s ease 1.2s;
+  margin-bottom:18px;
+}
+.explore-btn.show{opacity:1;}
+.explore-btn:hover{background:#e8dcc8;}
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0;transition:opacity 0.8s ease 1.4s;}
+.scroll-hint.show{opacity:1;}
+.scroll-hint-text{font-size:8px;color:#3a3a3a;letter-spacing:2px;}
+.sa{display:flex;flex-direction:column;align-items:center;animation:bounceA 2s ease-in-out infinite;}
+@keyframes bounceA{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+.sa-line{width:1px;height:12px;background:#C9A84C;opacity:0.25;}
+.sa-head{width:5px;height:5px;border-right:1px solid #C9A84C;border-bottom:1px solid #C9A84C;transform:rotate(45deg);opacity:0.25;margin-top:-4px;}
+
+.sec-head{text-align:center;padding:65px 20px 35px;}
+.sec-head h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:#e8dcc8;font-style:italic;letter-spacing:2px;}
+.sec-line{width:45px;height:1px;background:#C9A84C;margin:10px auto 0;opacity:0.5;}
+
+/* ==================== DUPATTA SECTION ==================== */
+#dupatta{background:#000;padding-bottom:60px;}
+.dup-scroll-wrap{overflow-x:auto;padding:0 20px 10px;scrollbar-width:none;}
+.dup-scroll-wrap::-webkit-scrollbar{display:none;}
+.dup-row{display:flex;gap:10px;width:max-content;}
+.dup-card{
+  width:150px;flex-shrink:0;
+  background:#0a0a0a;border-radius:4px;overflow:hidden;
+  border:0.5px solid #1a1a1a;
+  transition:border-color 0.3s ease;
   cursor:pointer;
-  font-family:'Montserrat',sans-serif;
-  transition:all 0.4s ease;
-  position:relative;
-  overflow:hidden;
 }
-.explore-btn::before{
-  content:'';
-  position:absolute;
-  top:0;left:-100%;
-  width:100%;height:100%;
-  background:rgba(201,168,76,0.1);
-  transition:left 0.4s ease;
-}
-.explore-btn:hover::before{left:0;}
-.explore-btn:hover{border-color:#C9A84C;color:#C9A84C;}
+.dup-card.active,
+.dup-card:hover{border-color:#C9A84C;}
+.dup-card img{width:100%;height:190px;object-fit:cover;display:block;}
+.dup-card-info{padding:10px;}
+.dup-card-name{font-family:'Cormorant Garamond',serif;font-size:13px;color:#e8dcc8;font-style:italic;margin-bottom:3px;}
+.dup-card-price{font-size:11px;color:#C9A84C;margin-bottom:8px;}
+.dup-card-btns{display:flex;gap:4px;}
+.btn-dtl{flex:1;padding:5px;border:0.5px solid #333;background:transparent;color:#888;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.3s;}
+.btn-dtl:hover{border-color:#e8dcc8;color:#e8dcc8;}
+.btn-shop{flex:1;padding:5px;border:none;background:#C9A84C;color:#000;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;transition:all 0.3s;}
+.btn-shop:hover{background:#e8dcc8;}
+.swipe-hint{text-align:center;font-size:8px;color:#2a2a2a;letter-spacing:2px;margin-top:8px;}
 
-/* ============================================
-   SECTION TITLES
-   ============================================ */
-.section-header{text-align:center;padding:80px 20px 50px;}
-.section-header h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:38px;
-  font-weight:300;
-  color:#e8dcc8;
-  font-style:italic;
-  letter-spacing:2px;
-}
-.section-line{width:60px;height:1px;background:#C9A84C;margin:15px auto 0;}
-
-/* ============================================
-   DUPATTA SECTION
-   ============================================ */
-#dupatta{background:#000;}
-.dupatta-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:2px;
-  padding:0 2px 80px;
-}
-.product-card{
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-  aspect-ratio:3/4;
-}
-.product-card img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform 0.6s ease;
-}
-.product-card:hover img{transform:scale(1.05);}
-.product-card-overlay{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  padding:30px 20px 20px;
-  background:linear-gradient(transparent,rgba(0,0,0,0.85));
-  transform:translateY(100%);
-  transition:transform 0.4s ease;
-}
-.product-card:hover .product-card-overlay{transform:translateY(0);}
-
-/* Mobile touch support */
-.product-card.touched .product-card-overlay{transform:translateY(0);}
-.product-card.touched img{transform:scale(1.05);}
-
-.know-details-btn{
-  display:block;
-  width:100%;
-  padding:12px;
-  background:transparent;
-  border:1px solid rgba(232,220,200,0.6);
-  color:#e8dcc8;
-  font-size:10px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  cursor:pointer;
-  font-family:'Montserrat',sans-serif;
-  transition:all 0.3s ease;
-  text-align:center;
-}
-.know-details-btn:hover,
-.know-details-btn:active{background:#C9A84C;border-color:#C9A84C;color:#000;}
-
-/* ============================================
-   SUITS SECTION
-   ============================================ */
-#suits{background:#0a0a0a;}
+/* ==================== SUITS SECTION ==================== */
+#suits{background:#0a0a0a;padding-bottom:20px;}
+.suits-layout{padding:0 15px;}
 .suits-grid{
   display:grid;
-  grid-template-columns:1fr 1fr 1.5fr;
-  grid-template-rows:auto auto;
-  gap:2px;
-  padding:0 2px;
-}
-.suit-card-tall{
-  grid-row:span 2;
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-  min-height:700px;
-}
-.suit-card-tall img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform 0.6s ease;
-}
-.suit-card-tall:hover img{transform:scale(1.05);}
-.suit-card-small{
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-  aspect-ratio:3/4;
-}
-.suit-card-small img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform 0.6s ease;
-}
-.suit-card-small:hover img{transform:scale(1.05);}
-.suit-featured{
-  grid-column:3;
-  grid-row:span 2;
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-  min-height:700px;
-}
-.suit-featured img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform 0.6s ease;
-}
-.suit-featured:hover img{transform:scale(1.05);}
-.suit-featured-overlay{
-  position:absolute;
-  top:0;left:0;right:0;bottom:0;
-  background:rgba(0,0,0,0.35);
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:40px;
-}
-.suit-featured-text{
-  font-family:'Cormorant Garamond',serif;
-  font-size:36px;
-  color:#e8dcc8;
-  font-style:italic;
-  margin-bottom:5px;
-}
-.suit-featured-sub{
-  font-size:9px;
-  letter-spacing:4px;
-  color:#C9A84C;
-  text-transform:uppercase;
-  margin-bottom:20px;
-}
-.shop-now-btn{
-  display:inline-block;
-  padding:12px 35px;
-  border:1px solid rgba(232,220,200,0.7);
-  color:#e8dcc8;
-  font-size:10px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  background:transparent;
-  cursor:pointer;
-  font-family:'Montserrat',sans-serif;
-  transition:all 0.3s ease;
-  width:fit-content;
-}
-.shop-now-btn:hover{background:#C9A84C;border-color:#C9A84C;color:#000;}
-.card-overlay{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  padding:20px 15px 15px;
-  background:linear-gradient(transparent,rgba(0,0,0,0.85));
-  transform:translateY(100%);
-  transition:transform 0.4s ease;
-}
-.suit-card-small:hover .card-overlay,
-.suit-card-tall:hover .card-overlay,
-.suit-card-small.touched .card-overlay,
-.suit-card-tall.touched .card-overlay{transform:translateY(0);}
-
-/* ============================================
-   COLLECTION SECTION
-   ============================================ */
-#collection{background:#000;}
-.collection-text{
-  text-align:center;
-  padding:0 20px 60px;
-  max-width:750px;
-  margin:0 auto;
-}
-.collection-subtitle{
-  font-size:9px;
-  letter-spacing:5px;
-  color:#C9A84C;
-  text-transform:uppercase;
-  margin-bottom:20px;
-}
-.collection-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:42px;
-  font-weight:300;
-  color:#e8dcc8;
-  font-style:italic;
-  margin-bottom:30px;
-}
-/* CHANGE HINDI TEXT HERE */
-.collection-hindi{
-  font-size:14px;
-  line-height:2.2;
-  color:rgba(232,220,200,0.7);
-}
-.fabric-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:2px;
-  padding:0 2px;
-  position:relative;
-}
-.fabric-card{
-  position:relative;
-  overflow:hidden;
-  aspect-ratio:3/4;
-  cursor:pointer;
-}
-.fabric-card img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform 0.6s ease;
-}
-.fabric-card:hover img{transform:scale(1.05);}
-.fabric-shop-overlay{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  opacity:0;
-  transition:opacity 0.4s ease;
-}
-.fabric-card:hover .fabric-shop-overlay,
-.fabric-card.touched .fabric-shop-overlay{opacity:1;}
-.fabric-shop-btn{
-  padding:12px 30px;
-  background:rgba(0,0,0,0.7);
-  border:1px solid #C9A84C;
-  color:#C9A84C;
-  font-size:10px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  cursor:pointer;
-  font-family:'Montserrat',sans-serif;
-  white-space:nowrap;
-  transition:all 0.3s ease;
-}
-.fabric-shop-btn:hover,
-.fabric-shop-btn:active{background:#C9A84C;color:#000;}
-
-/* ============================================
-   FOLLOW US SECTION
-   ============================================ */
-#follow{background:#0a0a0a;}
-.follow-container{
-  display:grid;
   grid-template-columns:1fr 1fr;
-  min-height:80vh;
+  grid-template-rows:auto auto;
+  gap:3px;
+  margin-bottom:3px;
 }
-.follow-left{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:80px 60px;
+.suit-tall{
+  grid-row:span 2;
+  position:relative;overflow:hidden;cursor:pointer;
+  min-height:420px;
 }
-.follow-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:48px;
-  font-weight:300;
-  color:#e8dcc8;
-  font-style:italic;
-  margin-bottom:15px;
+.suit-tall img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.6s ease;}
+.suit-tall:hover img,.suit-tall.active img{transform:scale(1.03);}
+.suit-sm{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;}
+.suit-sm img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.6s ease;}
+.suit-sm:hover img,.suit-sm.active img{transform:scale(1.03);}
+.suit-featured{position:relative;overflow:hidden;cursor:pointer;grid-column:span 2;height:280px;}
+.suit-featured img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.6s ease;}
+.suit-featured:hover img{transform:scale(1.02);}
+.suit-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:25px 20px 20px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.88));
 }
-.follow-sub{
-  font-size:10px;
-  letter-spacing:4px;
-  color:#C9A84C;
-  text-transform:uppercase;
-  margin-bottom:50px;
+.suit-featured-text{font-family:'Cormorant Garamond',serif;font-size:26px;color:#e8dcc8;font-style:italic;margin-bottom:3px;}
+.suit-featured-sub{font-size:7px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:12px;}
+.suit-know-btn{
+  display:inline-block;padding:7px 18px;
+  border:0.5px solid rgba(232,220,200,0.5);
+  color:#e8dcc8;font-size:8px;letter-spacing:2px;
+  text-transform:uppercase;background:transparent;
+  cursor:pointer;font-family:'Montserrat',sans-serif;
+  transition:all 0.3s;
 }
-.social-links{display:flex;flex-direction:column;gap:20px;}
-.social-link{
-  display:flex;
-  align-items:center;
-  gap:15px;
+.suit-know-btn:hover{background:#C9A84C;border-color:#C9A84C;color:#000;}
+.card-hover-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:10px 10px 8px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.88));
+  transform:translateY(100%);transition:transform 0.35s ease;
+}
+.suit-tall:hover .card-hover-overlay,
+.suit-sm:hover .card-hover-overlay,
+.suit-tall.active .card-hover-overlay,
+.suit-sm.active .card-hover-overlay{transform:translateY(0);}
+.card-know-btn{
+  display:block;width:100%;padding:6px;
+  border:0.5px solid rgba(232,220,200,0.4);
+  background:transparent;color:#e8dcc8;
+  font-size:8px;letter-spacing:1px;text-transform:uppercase;
+  cursor:pointer;font-family:'Montserrat',sans-serif;
+  text-align:center;transition:all 0.3s;
+}
+.card-know-btn:hover{background:#C9A84C;border-color:#C9A84C;color:#000;}
+
+/* corner bracket touch animation */
+.bracket-wrap{position:relative;}
+.bracket-wrap::before,.bracket-wrap::after{
+  content:'';position:absolute;
+  width:12px;height:12px;
+  opacity:0;transition:opacity 0.3s ease;
+  z-index:10;
+}
+.bracket-wrap::before{top:4px;left:4px;border-top:1.5px solid #C9A84C;border-left:1.5px solid #C9A84C;}
+.bracket-wrap::after{top:4px;right:4px;border-top:1.5px solid #C9A84C;border-right:1.5px solid #C9A84C;}
+.bracket-wrap.active::before,
+.bracket-wrap.active::after,
+.bracket-wrap:hover::before,
+.bracket-wrap:hover::after{opacity:1;}
+.view-all-btn{
+  display:block;width:calc(100% - 30px);margin:12px 15px 0;
+  padding:12px;border:0.5px solid #C9A84C;
+  background:transparent;color:#C9A84C;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  cursor:pointer;font-family:'Montserrat',sans-serif;
+  text-align:center;transition:all 0.3s;
   text-decoration:none;
-  color:#e8dcc8;
-  font-size:12px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  padding-bottom:20px;
-  border-bottom:1px solid rgba(232,220,200,0.1);
+}
+.view-all-btn:hover{background:#C9A84C;color:#000;}
+
+/* ==================== COLLECTION TEXT SECTION ==================== */
+#collection-text{background:#000;padding:60px 20px;}
+.coll-subtitle{font-size:8px;letter-spacing:5px;color:#C9A84C;text-transform:uppercase;margin-bottom:16px;text-align:center;}
+.coll-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-weight:300;color:#e8dcc8;
+  font-style:italic;margin-bottom:25px;text-align:center;
+}
+/* ========== CHANGE HINDI TEXT HERE — replace text inside <p> ========== */
+.coll-hindi{
+  font-size:13px;line-height:2.2;
+  color:rgba(232,220,200,0.65);
+  max-width:680px;margin:0 auto;text-align:center;
+}
+
+/* ==================== FABRIC SECTION ==================== */
+#fabric{background:#0a0a0a;padding-bottom:60px;}
+.fab-scroll-wrap{overflow-x:auto;padding:0 20px 10px;scrollbar-width:none;}
+.fab-scroll-wrap::-webkit-scrollbar{display:none;}
+.fab-row{display:flex;gap:10px;width:max-content;}
+.fab-card{
+  width:150px;flex-shrink:0;
+  background:#000;border-radius:4px;overflow:hidden;
+  border:0.5px solid #1a1a1a;cursor:pointer;
+  transition:border-color 0.3s ease;
+}
+.fab-card.active,.fab-card:hover{border-color:#C9A84C;}
+.fab-card img{width:100%;height:190px;object-fit:cover;display:block;}
+.fab-card-info{padding:10px;}
+.fab-card-name{font-family:'Cormorant Garamond',serif;font-size:13px;color:#e8dcc8;font-style:italic;margin-bottom:3px;}
+.fab-card-price{font-size:11px;color:#C9A84C;margin-bottom:8px;}
+.fab-card-btns{display:flex;gap:4px;}
+
+/* ==================== FOLLOW US SECTION ==================== */
+#follow{background:#000;}
+.follow-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:70vh;}
+.follow-left{display:flex;flex-direction:column;justify-content:center;padding:60px 40px;}
+.follow-title{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#e8dcc8;font-style:italic;margin-bottom:12px;}
+.follow-sub{font-size:9px;letter-spacing:4px;color:#C9A84C;text-transform:uppercase;margin-bottom:40px;}
+.social-links{display:flex;flex-direction:column;gap:16px;}
+.social-link{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;color:#e8dcc8;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  padding-bottom:16px;border-bottom:0.5px solid rgba(232,220,200,0.08);
   transition:color 0.3s ease;
 }
 .social-link:hover{color:#C9A84C;}
-.social-arrow{margin-left:auto;opacity:0;transition:opacity 0.3s ease;}
-.social-link:hover .social-arrow{opacity:1;}
-/* CHANGE FOLLOW US PHOTO HERE → replace sonal.png */
+.social-arr{margin-left:auto;opacity:0;transition:opacity 0.3s;}
+.social-link:hover .social-arr{opacity:1;}
+/* ========== CHANGE FOLLOW US PHOTO HERE — replace sonal.png ========== */
 .follow-right img{width:100%;height:100%;object-fit:cover;}
 
-/* ============================================
-   FOOTER
-   ============================================ */
-footer{
-  background:#000;
-  border-top:1px solid rgba(201,168,76,0.15);
-  padding:50px 60px;
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:40px;
+/* ==================== FOOTER ==================== */
+footer{background:#000;border-top:1px solid rgba(201,168,76,0.1);padding:40px 30px;}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;margin-bottom:30px;}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:20px;color:#e8dcc8;font-style:italic;margin-bottom:6px;}
+.footer-tag{font-size:8px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;}
+.footer-ttl{font-size:8px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:14px;}
+.footer-txt{font-size:11px;color:rgba(232,220,200,0.5);line-height:2;}
+/* ========== CHANGE MAP LINK HERE — replace href ========== */
+.footer-map{
+  display:inline-block;margin-top:12px;
+  padding:8px 20px;border:0.5px solid rgba(201,168,76,0.35);
+  color:#C9A84C;font-size:8px;letter-spacing:2px;
+  text-transform:uppercase;text-decoration:none;transition:all 0.3s;
 }
-.footer-brand{
-  font-family:'Cormorant Garamond',serif;
-  font-size:22px;
-  color:#e8dcc8;
-  font-style:italic;
-  margin-bottom:10px;
-}
-.footer-tagline{font-size:9px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;}
-.footer-title{font-size:9px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:20px;}
-.footer-text{font-size:12px;color:rgba(232,220,200,0.6);line-height:2;}
-.footer-map-btn{
-  display:inline-block;
-  margin-top:15px;
-  padding:10px 25px;
-  border:1px solid rgba(201,168,76,0.4);
-  color:#C9A84C;
-  font-size:9px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  text-decoration:none;
-  transition:all 0.3s ease;
-}
-.footer-map-btn:hover{background:#C9A84C;color:#000;}
-.footer-bottom{
-  grid-column:span 3;
-  border-top:1px solid rgba(232,220,200,0.08);
-  padding-top:30px;
-  text-align:center;
-  font-size:10px;
-  color:rgba(232,220,200,0.3);
-  letter-spacing:2px;
-}
+.footer-map:hover{background:#C9A84C;color:#000;}
+.footer-link{color:rgba(232,220,200,0.5);text-decoration:none;display:block;margin-bottom:8px;font-size:11px;transition:color 0.3s;}
+.footer-link:hover{color:#C9A84C;}
+.footer-bottom{border-top:0.5px solid rgba(232,220,200,0.06);padding-top:20px;text-align:center;font-size:9px;color:rgba(232,220,200,0.2);letter-spacing:2px;}
 
-/* ============================================
-   GLITTER OVERLAY
-   ============================================ */
-#glitter-overlay{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  pointer-events:none;
-  z-index:9999;
-  opacity:0;
-  background:transparent;
-}
-.glitter-particle{
-  position:absolute;
-  border-radius:50%;
-  pointer-events:none;
-}
+/* ==================== GLITTER OVERLAY ==================== */
+#glitter-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;opacity:0;background:transparent;}
+.gp{position:absolute;border-radius:50%;pointer-events:none;}
+@keyframes gpMove{0%{transform:translate(0,0) scale(1);opacity:1;}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0;}}
 
-/* ============================================
-   SCROLL ANIMATIONS
-   ============================================ */
-.fade-in{
-  opacity:0;
-  transform:translateY(30px);
-  transition:opacity 0.8s ease,transform 0.8s ease;
-}
+/* ==================== FADE IN ON SCROLL ==================== */
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 
-/* ============================================
-   MOBILE RESPONSIVE
-   ============================================ */
-@media(max-width:768px){
-  nav{padding:15px 20px;}
-  .hero{grid-template-columns:1fr;min-height:auto;}
-  .hero-left{padding:100px 30px 40px;align-items:center;}
-  .hero-right{padding:40px 30px 60px;}
-  .hero-tagline{font-size:36px;}
-  .dupatta-grid{grid-template-columns:repeat(2,1fr);}
+/* ==================== MOBILE ==================== */
+@media(max-width:600px){
+  nav{padding:12px 16px;}
+  .nav-logo{font-size:12px;letter-spacing:2px;}
+  .w-cch{font-size:48px;}
+  .w-name{font-size:18px;}
   .suits-grid{grid-template-columns:1fr 1fr;}
-  .suit-card-tall{min-height:400px;}
-  .suit-featured{grid-column:span 2;min-height:400px;}
-  .fabric-grid{grid-template-columns:repeat(2,1fr);}
-  .follow-container{grid-template-columns:1fr;}
+  .suit-tall{min-height:300px;}
+  .follow-wrap{grid-template-columns:1fr;}
   .follow-right{min-height:50vh;}
-  footer{grid-template-columns:1fr;padding:40px 30px;}
-  .footer-bottom{grid-column:span 1;}
-  .welcome-cch{font-size:60px;}
-  .welcome-name{font-size:22px;text-align:center;padding:0 20px;}
+  .footer-grid{grid-template-columns:1fr;}
+  .coll-title{font-size:26px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================
-     WELCOME SCREEN
-     ============================================ -->
-<div id="welcome-screen">
-  <div class="welcome-line" id="welcome-line"></div>
-  <div class="welcome-cch" id="welcome-cch">CCH</div>
-  <div class="welcome-name" id="welcome-name">Chhabra Cloth House</div>
-  <div class="welcome-sub" id="welcome-sub">-fine fabrics & ladies suits-</div>
-  <div class="welcome-line" id="welcome-line2"></div>
-</div>
-
-<!-- GLITTER OVERLAY -->
+<!-- ========== GLITTER OVERLAY ========== -->
 <div id="glitter-overlay"></div>
 
-<!-- ============================================
-     NAVBAR
-     ============================================ -->
+<!-- ========== WELCOME SCREEN ========== -->
+<div id="welcome-screen">
+  <div class="w-line" id="wl1"></div>
+  <div class="w-cch" id="wcch">CCH</div>
+  <div class="w-name" id="wname">Chhabra Cloth House</div>
+  <div class="w-sub" id="wsub">— fine fabrics & ladies suits —</div>
+  <div class="w-line" id="wl2"></div>
+</div>
+
+<!-- ========== NAVBAR ========== -->
 <nav>
   <div class="nav-logo">chhabra cloth house</div>
-  <!-- CHANGE WHATSAPP NUMBER HERE → replace 919997739012 -->
-  <a class="nav-whatsapp" href="https://wa.me/919997739012" target="_blank">
-    💬 whatsapp us
-  </a>
+  <!-- ========== CHANGE WHATSAPP NUMBER HERE — replace 919997739012 ========== -->
+  <a class="nav-wa" href="https://wa.me/919997739012" target="_blank">💬 whatsapp us</a>
 </nav>
 
-<!-- ============================================
-     HERO SECTION
-     ============================================ -->
+<!-- ========== HERO SECTION ========== -->
 <section class="hero" id="home">
-  <div class="hero-left">
-    <!-- CHANGE OWNER PHOTO HERE → replace owner.jpg with new filename -->
-    <img class="owner-photo" src="images/owner.jpg" alt="Owner"/>
-    <!-- CHANGE BRAND LOGO HERE → replace BRAND.png with new filename -->
-    <img class="brand-logo" src="images/BRAND.png" alt="Chhabra Cloth House"/>
-    <div class="hero-cch">CCH</div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-tagline">Chhabra<br/>Cloth House</div>
-    <div class="hero-sub">-fine fabrics and ladies suits-</div>
-    <button class="explore-btn"
-      onclick="document.getElementById('dupatta').scrollIntoView({behavior:'smooth'})">
-      Explore
-    </button>
+  <div class="hero-topline" id="htl"></div>
+  <div class="hero-est" id="hest">EST. JANSATH, U.P.</div>
+  <!-- ========== CHANGE OWNER PHOTO HERE — replace owner.jpg ========== -->
+  <img class="owner-photo" id="hphoto" src="images/owner.jpg" alt="Owner"/>
+  <!-- ========== CHANGE BRAND LOGO HERE — replace BRAND.png ========== -->
+  <img class="brand-logo" id="hlogo" src="images/BRAND.png" alt="Chhabra Cloth House"/>
+  <div class="hero-sub" id="hsub">— fine fabrics & ladies suits —</div>
+  <button class="explore-btn" id="hbtn" onclick="document.getElementById('dupatta').scrollIntoView({behavior:'smooth'})">EXPLORE COLLECTION</button>
+  <div class="scroll-hint" id="hscroll">
+    <div class="scroll-hint-text">Scroll करें और collection देखें</div>
+    <div class="sa"><div class="sa-line"></div><div class="sa-head"></div></div>
   </div>
 </section>
 
-<!-- ============================================
-     DUPATTA SECTION
-     ============================================ -->
+<!-- ========== DUPATTA SECTION ========== -->
 <section id="dupatta">
-  <div class="section-header fade-in">
+  <div class="sec-head fade-in">
     <h2>our best collection in duppata</h2>
-    <div class="section-line"></div>
+    <div class="sec-line"></div>
   </div>
-  <div class="dupatta-grid">
+  <div class="dup-scroll-wrap">
+    <div class="dup-row" id="dup-row">
 
-    <!-- CHANGE DUPATTA 1 PHOTO HERE → replace duppata1.png -->
-    <!-- CHANGE DUPATTA 1 DETAILS HERE → name, price, fabric, occasion, description -->
-    <div class="product-card"
-      onclick="goToProduct('duppata1','png','Embroidered Dupatta','₹XXX','Pure Silk','Festive & Casual','A beautiful hand-embroidered dupatta perfect for all occasions.')">
-      <img src="images/duppata1.png" alt="Dupatta 1"/>
-      <div class="product-card-overlay">
-        <button class="know-details-btn">know details</button>
+      <!-- ========== CHANGE DUPATTA 1 PHOTO — replace duppata1.png ========== -->
+      <!-- ========== CHANGE DUPATTA 1 DETAILS — name, price, fabric, occasion, description ========== -->
+      <div class="dup-card bracket-wrap" onclick="goToProduct('duppata1','png','Cotton Dupatta','₹XXX','Pure Cotton','Casual & Daily','Soft and breathable cotton dupatta ideal for everyday wear.')">
+        <img src="images/duppata1.png" alt="Dupatta 1" onerror="this.style.background='#111';this.style.height='190px'"/>
+        <div class="dup-card-info">
+          <div class="dup-card-name">Cotton Dupatta</div>
+          <div class="dup-card-price">₹XXX</div>
+          <div class="dup-card-btns">
+            <button class="btn-dtl" onclick="event.stopPropagation();goToProduct('duppata1','png','Cotton Dupatta','₹XXX','Pure Cotton','Casual & Daily','Soft and breathable cotton dupatta ideal for everyday wear.')">Details</button>
+            <button class="btn-shop" onclick="event.stopPropagation();goToProduct('duppata1','png','Cotton Dupatta','₹XXX','Pure Cotton','Casual & Daily','Soft and breathable cotton dupatta ideal for everyday wear.')">Shop</button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- CHANGE DUPATTA 2 PHOTO HERE → replace duppata2.png -->
-    <!-- CHANGE DUPATTA 2 DETAILS HERE -->
-    <div class="product-card"
-      onclick="goToProduct('duppata2','png','Printed Dupatta','₹XXX','Chiffon','Casual & Party','Vibrant printed dupatta with elegant border work.')">
-      <img src="images/duppata2.png" alt="Dupatta 2"/>
-      <div class="product-card-overlay">
-        <button class="know-details-btn">know details</button>
+      <!-- ========== CHANGE DUPATTA 2 PHOTO — replace duppata2.png ========== -->
+      <!-- ========== CHANGE DUPATTA 2 DETAILS — name, price, fabric, occasion, description ========== -->
+      <div class="dup-card bracket-wrap" onclick="goToProduct('duppata2','png','Semar Dupatta','₹XXX','Semar','Festive & Party','Elegant semar dupatta with smooth drape and vibrant finish.')">
+        <img src="images/duppata2.png" alt="Dupatta 2" onerror="this.style.background='#111';this.style.height='190px'"/>
+        <div class="dup-card-info">
+          <div class="dup-card-name">Semar Dupatta</div>
+          <div class="dup-card-price">₹XXX</div>
+          <div class="dup-card-btns">
+            <button class="btn-dtl" onclick="event.stopPropagation();goToProduct('duppata2','png','Semar Dupatta','₹XXX','Semar','Festive & Party','Elegant semar dupatta with smooth drape and vibrant finish.')">Details</button>
+            <button class="btn-shop" onclick="event.stopPropagation();goToProduct('duppata2','png','Semar Dupatta','₹XXX','Semar','Festive & Party','Elegant semar dupatta with smooth drape and vibrant finish.')">Shop</button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- CHANGE DUPATTA 3 PHOTO HERE → replace duppata3.png -->
-    <!-- CHANGE DUPATTA 3 DETAILS HERE -->
-    <div class="product-card"
-      onclick="goToProduct('duppata3','png','Designer Dupatta','₹XXX','Georgette','Wedding & Festive','Exclusive designer dupatta with intricate pattern work.')">
-      <img src="images/duppata3.png" alt="Dupatta 3"/>
-      <div class="product-card-overlay">
-        <button class="know-details-btn">know details</button>
+      <!-- ========== CHANGE DUPATTA 3 PHOTO — replace duppata3.png ========== -->
+      <!-- ========== CHANGE DUPATTA 3 DETAILS ========== -->
+      <div class="dup-card bracket-wrap" onclick="goToProduct('duppata3','png','Banarsi Dupatta','₹XXX','Banarsi Silk','Wedding & Bridal','Rich banarsi dupatta with traditional golden border work.')">
+        <img src="images/duppata3.png" alt="Dupatta 3" onerror="this.style.background='#111';this.style.height='190px'"/>
+        <div class="dup-card-info">
+          <div class="dup-card-name">Banarsi Dupatta</div>
+          <div class="dup-card-price">₹XXX</div>
+          <div class="dup-card-btns">
+            <button class="btn-dtl" onclick="event.stopPropagation();goToProduct('duppata3','png','Banarsi Dupatta','₹XXX','Banarsi Silk','Wedding & Bridal','Rich banarsi dupatta with traditional golden border work.')">Details</button>
+            <button class="btn-shop" onclick="event.stopPropagation();goToProduct('duppata3','png','Banarsi Dupatta','₹XXX','Banarsi Silk','Wedding & Bridal','Rich banarsi dupatta with traditional golden border work.')">Shop</button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- CHANGE DUPATTA 4 PHOTO HERE → replace duppata4.png -->
-    <!-- CHANGE DUPATTA 4 DETAILS HERE -->
-    <div class="product-card"
-      onclick="goToProduct('duppata4','png','Floral Dupatta','₹XXX','Net','All Occasions','Light floral dupatta with premium finish.')">
-      <img src="images/duppata4.png" alt="Dupatta 4"/>
-      <div class="product-card-overlay">
-        <button class="know-details-btn">know details</button>
+      <!-- ========== CHANGE DUPATTA 4 PHOTO — replace duppata4.png ========== -->
+      <!-- ========== CHANGE DUPATTA 4 DETAILS ========== -->
+      <div class="dup-card bracket-wrap" onclick="goToProduct('duppata4','png','Organza Dupatta','₹XXX','Organza','Party & Festive','Light and sheer organza dupatta with delicate border.')">
+        <img src="images/duppata4.png" alt="Dupatta 4" onerror="this.style.background='#111';this.style.height='190px'"/>
+        <div class="dup-card-info">
+          <div class="dup-card-name">Organza Dupatta</div>
+          <div class="dup-card-price">₹XXX</div>
+          <div class="dup-card-btns">
+            <button class="btn-dtl" onclick="event.stopPropagation();goToProduct('duppata4','png','Organza Dupatta','₹XXX','Organza','Party & Festive','Light and sheer organza dupatta with delicate border.')">Details</button>
+            <button class="btn-shop" onclick="event.stopPropagation();goToProduct('duppata4','png','Organza Dupatta','₹XXX','Organza','Party & Festive','Light and sheer organza dupatta with delicate border.')">Shop</button>
+          </div>
+        </div>
       </div>
-    </div>
 
+      <!-- ========== ADD MORE DUPATTA CARDS BELOW THIS LINE ========== -->
+      <!-- Copy a card block above, change photo name and details -->
+
+    </div>
   </div>
+  <div class="swipe-hint">← swipe करें और देखें →</div>
 </section>
 
-<!-- ============================================
-     SUITS SECTION
-     ============================================ -->
+<!-- ========== SUITS SECTION ========== -->
 <section id="suits">
-  <div class="section-header fade-in">
+  <div class="sec-head fade-in">
     <h2>our best collection of suits</h2>
-    <div class="section-line"></div>
+    <div class="sec-line"></div>
   </div>
-  <div class="suits-grid">
+  <div class="suits-layout">
+    <div class="suits-grid">
 
-    <!-- CHANGE SUIT 1 PHOTO HERE → replace suit1.png -->
-    <!-- CHANGE SUIT 1 DETAILS HERE -->
-    <div class="suit-card-tall"
-      onclick="goToProduct('suit1','png','Embroidered Suit','₹XXX','Cotton Silk','Festive','Elegant embroidered suit with fine detailing.')">
-      <img src="images/suit1.png" alt="Suit 1"/>
-      <div class="card-overlay">
-        <button class="know-details-btn">know details</button>
+      <!-- ========== CHANGE SUIT 1 PHOTO — replace suit1.png ========== -->
+      <!-- ========== CHANGE SUIT 1 DETAILS ========== -->
+      <div class="suit-tall bracket-wrap" onclick="goToProduct('suit1','png','Embroidered Suit','₹XXX','Cotton Silk','Festive','Elegant embroidered suit with intricate handwork detailing.')">
+        <img src="images/suit1.png" alt="Suit 1" onerror="this.style.background='#111'"/>
+        <div class="card-hover-overlay">
+          <button class="card-know-btn">know details</button>
+        </div>
       </div>
+
+      <!-- ========== CHANGE SUIT 3 PHOTO — replace suit3.png ========== -->
+      <!-- ========== CHANGE SUIT 3 DETAILS ========== -->
+      <div class="suit-sm bracket-wrap" onclick="goToProduct('suit3','png','Printed Suit','₹XXX','Pure Cotton','Casual & Office','Comfortable printed suit for everyday and office wear.')">
+        <img src="images/suit3.png" alt="Suit 3" onerror="this.style.background='#111'"/>
+        <div class="card-hover-overlay">
+          <button class="card-know-btn">know details</button>
+        </div>
+      </div>
+
+      <!-- ========== CHANGE NEW MODEL PHOTO — replace new model.png ========== -->
+      <!-- ========== CHANGE NEW MODEL DETAILS ========== -->
+      <div class="suit-sm bracket-wrap" onclick="goToProduct('new model','png','Designer Suit','₹XXX','Georgette','Party & Wedding','Premium designer suit with modern silhouette and fine fabric.')">
+        <img src="images/new model.png" alt="Designer Suit" onerror="this.style.background='#111'"/>
+        <div class="card-hover-overlay">
+          <button class="card-know-btn">know details</button>
+        </div>
+      </div>
+
     </div>
 
-    <!-- CHANGE SUIT 3 PHOTO HERE → replace suit3.png -->
-    <!-- CHANGE SUIT 3 DETAILS HERE -->
-    <div class="suit-card-small"
-      onclick="goToProduct('suit3','png','Printed Suit','₹XXX','Pure Cotton','Casual & Office','Comfortable printed suit for everyday wear.')">
-      <img src="images/suit3.png" alt="Suit 3"/>
-      <div class="card-overlay">
-        <button class="know-details-btn">know details</button>
-      </div>
-    </div>
-
-    <!-- CHANGE NEW MODEL PHOTO HERE → replace new model.png -->
-    <!-- CHANGE NEW MODEL DETAILS HERE -->
-    <div class="suit-card-small"
-      onclick="goToProduct('new model','png','Designer Suit','₹XXX','Georgette','Party & Wedding','Premium designer suit with modern cut.')">
-      <img src="images/new model.png" alt="New Model"/>
-      <div class="card-overlay">
-        <button class="know-details-btn">know details</button>
-      </div>
-    </div>
-
-    <!-- CHANGE FEATURED SUIT PHOTO HERE → replace suit2.png -->
-    <!-- CHANGE FEATURED SUIT DETAILS HERE -->
-    <div class="suit-featured"
-      onclick="goToProduct('suit2','png','Classic Suit','₹XXX','Premium Fabric','All Occasions','Our signature classic suit - timeless elegance.')">
-      <img src="images/suit2.png" alt="Featured Suit"/>
-      <div class="suit-featured-overlay">
+    <!-- ========== CHANGE FEATURED SUIT PHOTO — replace suit2.png ========== -->
+    <!-- ========== CHANGE FEATURED SUIT DETAILS ========== -->
+    <div class="suit-featured bracket-wrap" onclick="goToProduct('suit2','png','Classic Suit','₹XXX','Premium Fabric','All Occasions','Our signature classic suit — timeless elegance for every occasion.')">
+      <img src="images/suit2.png" alt="Featured Suit" onerror="this.style.background='#111'"/>
+      <div class="suit-overlay">
         <div class="suit-featured-text">Shop our Latest</div>
         <div class="suit-featured-sub">Classic Arrivals</div>
-        <button class="shop-now-btn">Shop Now</button>
+        <button class="suit-know-btn" onclick="event.stopPropagation();goToProduct('suit2','png','Classic Suit','₹XXX','Premium Fabric','All Occasions','Our signature classic suit — timeless elegance for every occasion.')">Know Details</button>
       </div>
     </div>
 
   </div>
+
+  <!-- ========== VIEW ALL SUITS BUTTON — links to collection.html ========== -->
+  <a href="collection.html?tab=suits" class="view-all-btn">VIEW ALL SUITS →</a>
 </section>
 
-<!-- ============================================
-     COLLECTION / FABRIC SECTION
-     ============================================ -->
-<section id="collection">
-  <div class="section-header fade-in">
-    <div class="collection-subtitle">Chhabra's collection</div>
-    <div class="collection-title">Redefining Comfortable Classics</div>
-  </div>
-  <div class="collection-text fade-in">
-    <!-- CHANGE HINDI TEXT HERE → replace text between <p> tags -->
-    <p class="collection-hindi">
-      Chhabra Cloth House में आपका हार्दिक स्वागत है। यहाँ हर महिला के लिए फैशन, एलिगेंस और गुणवत्ता का शानदार संगम मिलता है। हमारे यहाँ लेटेस्ट डिज़ाइन के सूट, खूबसूरत दुपट्टे, ट्रेंडी शरारा, प्रीमियम फैब्रिक्स, पेटीकोट, अस्तर और स्टोल की एक्सक्लूसिव कलेक्शन उपलब्ध है। हमारी पहचान है बेहतरीन क्वालिटी, सही दाम और ग्राहकों का भरोसा, जो हर खरीदारी को एक खास अनुभव बना देता है।
-    </p>
-  </div>
-  <div class="fabric-grid">
-
-    <!-- CHANGE FABRIC 1 PHOTO HERE → replace grey.jpg -->
-    <!-- CHANGE FABRIC 1 DETAILS HERE -->
-    <div class="fabric-card"
-      onclick="goToProduct('grey','jpg','Grey Silk Fabric','₹XXX per meter','Pure Silk','All Occasions','Premium grey silk fabric with smooth texture.')">
-      <img src="images/grey.jpg" alt="Grey Fabric"/>
-      <div class="fabric-shop-overlay">
-        <button class="fabric-shop-btn">Shop Now</button>
-      </div>
-    </div>
-
-    <!-- CHANGE FABRIC 2 PHOTO HERE → replace yellow.png -->
-    <!-- CHANGE FABRIC 2 DETAILS HERE -->
-    <div class="fabric-card"
-      onclick="goToProduct('yellow','png','Yellow Silk Fabric','₹XXX per meter','Pure Silk','Festive','Vibrant yellow silk perfect for festive occasions.')">
-      <img src="images/yellow.png" alt="Yellow Fabric"/>
-      <div class="fabric-shop-overlay">
-        <button class="fabric-shop-btn">Shop Now</button>
-      </div>
-    </div>
-
-    <!-- CHANGE FABRIC 3 PHOTO HERE → replace red.png -->
-    <!-- CHANGE FABRIC 3 DETAILS HERE -->
-    <div class="fabric-card"
-      onclick="goToProduct('red','png','Red Silk Fabric','₹XXX per meter','Banarasi Silk','Wedding & Bridal','Rich red banarasi silk for special occasions.')">
-      <img src="images/red.png" alt="Red Fabric"/>
-      <div class="fabric-shop-overlay">
-        <button class="fabric-shop-btn">Shop Now</button>
-      </div>
-    </div>
-
-    <!-- CHANGE FABRIC 4 PHOTO HERE → replace fabric3.jpg -->
-    <!-- CHANGE FABRIC 4 DETAILS HERE -->
-    <div class="fabric-card"
-      onclick="goToProduct('fabric3','jpg','Premium Fabric','₹XXX per meter','Mixed','All Occasions','Exclusive premium fabric from our special collection.')">
-      <img src="images/fabric3.jpg" alt="Premium Fabric"/>
-      <div class="fabric-shop-overlay">
-        <button class="fabric-shop-btn">Shop Now</button>
-      </div>
-    </div>
-
-  </div>
+<!-- ========== COLLECTION DESCRIPTION SECTION ========== -->
+<section id="collection-text" class="fade-in">
+  <div class="coll-subtitle">Chhabra's collection</div>
+  <div class="coll-title">Redefining Comfortable Classics</div>
+  <!-- ========== CHANGE HINDI TEXT HERE — replace text inside <p> ========== -->
+  <p class="coll-hindi">
+    Chhabra Cloth House में आपका हार्दिक स्वागत है। यहाँ हर महिला के लिए फैशन, एलिगेंस और गुणवत्ता का शानदार संगम मिलता है। हमारे यहाँ लेटेस्ट डिज़ाइन के सूट, खूबसूरत दुपट्टे, ट्रेंडी शरारा, प्रीमियम फैब्रिक्स, पेटीकोट, अस्तर और स्टोल की एक्सक्लूसिव कलेक्शन उपलब्ध है। हमारी पहचान है बेहतरीन क्वालिटी, सही दाम और ग्राहकों का भरोसा, जो हर खरीदारी को एक खास अनुभव बना देता है।
+  </p>
 </section>
 
-<!-- ============================================
-     FOLLOW US SECTION
-     ============================================ -->
+<!-- ========== FABRIC SECTION ========== -->
+<section id="fabric">
+  <div class="sec-head fade-in">
+    <h2>fabric collection</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="fab-scroll-wrap">
+    <div class="fab-row">
+
+      <!-- ========== CHANGE FABRIC 1 PHOTO — replace grey.jpg ========== -->
+      <!-- ========== CHANGE FABRIC 1 DETAILS ========== -->
+      <div class="fab-card bracket-wrap" onclick="goToProduct('grey','jpg','Astar Fabric','₹XXX per meter','Astar','All Occasions','Premium quality astar fabric, smooth and durable for all types of garments.')">
+        <img src="images/grey.jpg" alt="Astar" onerror="this.style.background='#111';this.style.height='190px'"/>
+        <div class="fab-card-info">
+          <div class="fab-card-name">Astar</div>
+          <div class="fab-card-price">₹XXX / meter</div>
+          <div class="fab-card-btns">
+            <button class="btn-dtl" onclick="event.stopPropagation();goToProduct('grey','jpg','Astar Fabric','₹XXX per meter','Astar','All Occasions','Premium quality astar fabric.')">Details</button>
+            <button class="btn-shop" onclick="event.stopPropagation();goToProduct('grey','jpg','Astar Fabric','₹XXX per meter','Astar','All Occasions','Premium quality astar fabric.')">Shop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHANGE FABRIC 2 PHOTO — replace yellow.png ========== -->
+      <!-- ========== CHANGE FABRIC 2 DETAILS ========== -->
+      <div class="fab-card bracket-wrap" onclick="goToProduct('yellow','png','Fandy Silk','₹XXX per meter','Fandy Silk','Festive & Party','Beautiful fandy silk with natural sheen, perfect for festive occasions.')">
+        <img src="images/yellow.png" alt="Fandy Silk" onerror="this.style.background='#111';this.style.height='190px'"/>
+        <div class="fab-card-info">
+          <div class="fab-card-name">Fandy Silk</div>
+          <div class="fab-card-price">₹XXX / meter</div>
+          <div class="fab-card-btns">
+            <button class="btn-dtl" onclick="event.stopPropagation();goToProduct('yellow','png','Fandy Silk','₹XXX per meter','Fandy Silk','Festive & Party','Beautiful fandy silk with natural sheen.')">Details</button>
+            <button class="btn-shop" onclick="event.stopPropagation();goToProduct('yellow','png','Fandy Silk','₹XXX per meter','Fandy Silk','Festive & Party','Beautiful fandy silk with natural sheen.')">Shop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHANGE FABRIC 3 PHOTO — replace red.png ========== -->
+      <!-- ========== CHANGE FABRIC 3 DETAILS ========== -->
+      <div class="fab-card bracket-wrap" onclick="goToProduct('red','png','Sattan Fabric','₹XXX per meter','Sattan','Wedding & Bridal','Luxurious sattan fabric with rich texture for bridal and wedding wear.')">
+        <img src="images/red.png" alt="Sattan" onerror="this.style.background='#111';this.style.height='190px'"/>
+        <div class="fab-card-info">
+          <div class="fab-card-name">Sattan Fabric</div>
+          <div class="fab-card-price">₹XXX / meter</div>
+          <div class="fab-card-btns">
+            <button class="btn-dtl" onclick="event.stopPropagation();goToProduct('red','png','Sattan Fabric','₹XXX per meter','Sattan','Wedding & Bridal','Luxurious sattan fabric.')">Details</button>
+            <button class="btn-shop" onclick="event.stopPropagation();goToProduct('red','png','Sattan Fabric','₹XXX per meter','Sattan','Wedding & Bridal','Luxurious sattan fabric.')">Shop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CHANGE FABRIC 4 PHOTO — replace fabric3.jpg ========== -->
+      <!-- ========== CHANGE FABRIC 4 DETAILS ========== -->
+      <div class="fab-card bracket-wrap" onclick="goToProduct('fabric3','jpg','Japani Silk','₹XXX per meter','Japani Silk','All Occasions','Premium japanese silk with smooth finish and elegant drape.')">
+        <img src="images/fabric3.jpg" alt="Japani Silk" onerror="this.style.background='#111';this.style.height='190px'"/>
+        <div class="fab-card-info">
+          <div class="fab-card-name">Japani Silk</div>
+          <div class="fab-card-price">₹XXX / meter</div>
+          <div class="fab-card-btns">
+            <button class="btn-dtl" onclick="event.stopPropagation();goToProduct('fabric3','jpg','Japani Silk','₹XXX per meter','Japani Silk','All Occasions','Premium japanese silk.')">Details</button>
+            <button class="btn-shop" onclick="event.stopPropagation();goToProduct('fabric3','jpg','Japani Silk','₹XXX per meter','Japani Silk','All Occasions','Premium japanese silk.')">Shop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== ADD MORE FABRIC CARDS BELOW THIS LINE ========== -->
+      <!-- Copy a card block above, change photo name and details -->
+
+    </div>
+  </div>
+  <div class="swipe-hint">← swipe करें और देखें →</div>
+</section>
+
+<!-- ========== FOLLOW US SECTION ========== -->
 <section id="follow">
-  <div class="follow-container">
+  <div class="follow-wrap">
     <div class="follow-left fade-in">
       <div class="follow-title">Follow Us<br/>Online</div>
-      <div class="follow-sub">stay connected with us</div>
+      <div class="follow-sub">stay connected</div>
       <div class="social-links">
-
-        <!-- CHANGE INSTAGRAM LINK HERE → replace href link -->
-        <a class="social-link"
-          href="https://www.instagram.com/g_singh9012?igsh=dmRla2Q2OTBrcjFv"
-          target="_blank">
-          <span>📸</span> Instagram
-          <span class="social-arrow">→</span>
+        <!-- ========== CHANGE INSTAGRAM LINK HERE ========== -->
+        <a class="social-link" href="https://www.instagram.com/g_singh9012?igsh=dmRla2Q2OTBrcjFv" target="_blank">
+          📸 Instagram <span class="social-arr">→</span>
         </a>
-
-        <!-- CHANGE FACEBOOK LINK HERE → paste facebook link in href="" -->
+        <!-- ========== CHANGE FACEBOOK LINK HERE — replace # with facebook link ========== -->
+        <a class="social-link" href="https://www.facebook.com/share/14fa2tdmQxk/" target="_blank">
+          📘 Facebook <span class="social-arr">→</span>
+        </a>
+        <!-- ========== CHANGE TWITTER LINK HERE — replace # with twitter link ========== -->
         <a class="social-link" href="#" target="_blank">
-          <span>📘</span> Facebook
-          <span class="social-arrow">→</span>
+          🐦 Twitter <span class="social-arr">→</span>
         </a>
-
-        <!-- CHANGE TWITTER LINK HERE → paste twitter link in href="" -->
-        <a class="social-link" href="#" target="_blank">
-          <span>🐦</span> Twitter
-          <span class="social-arrow">→</span>
+        <!-- ========== CHANGE WHATSAPP NUMBER HERE ========== -->
+        <a class="social-link" href="https://wa.me/919997739012" target="_blank">
+          💬 WhatsApp <span class="social-arr">→</span>
         </a>
-
-        <!-- CHANGE WHATSAPP NUMBER HERE → replace 919997739012 -->
-        <a class="social-link"
-          href="https://wa.me/919997739012"
-          target="_blank">
-          <span>💬</span> WhatsApp
-          <span class="social-arrow">→</span>
-        </a>
-
       </div>
     </div>
-    <!-- CHANGE FOLLOW US PHOTO HERE → replace sonal.png -->
+    <!-- ========== CHANGE FOLLOW US SECTION PHOTO HERE — replace sonal.png ========== -->
     <div class="follow-right">
-      <img src="images/sonal.png" alt="Chhabra Cloth House Store"/>
+      <img src="images/sonal.png" alt="Chhabra Cloth House Store" onerror="this.style.background='#111'"/>
     </div>
   </div>
 </section>
 
-<!-- ============================================
-     FOOTER
-     ============================================ -->
+<!-- ========== FOOTER ========== -->
 <footer>
-  <div>
-    <div class="footer-brand">Chhabra Cloth House</div>
-    <div class="footer-tagline">fine fabrics & ladies suits</div>
-  </div>
-  <div>
-    <div class="footer-title">Visit Us</div>
-    <!-- CHANGE ADDRESS HERE -->
-    <div class="footer-text">
-      Chhabra Colony<br/>
-      Jansath, Muzaffarnagar<br/>
-      Uttar Pradesh - 251314<br/><br/>
-      <!-- CHANGE PHONE NUMBER HERE -->
-      📞 +91 92861 75004
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Chhabra Cloth House</div>
+      <div class="footer-tag">fine fabrics & ladies suits</div>
     </div>
-    <!-- CHANGE MAP LINK HERE → replace href link -->
-    <a class="footer-map-btn"
-      href="https://maps.app.goo.gl/Byc9CWc4PjPcx67P6"
-      target="_blank">
-      Open in Maps →
-    </a>
-  </div>
-  <div>
-    <div class="footer-title">Connect</div>
-    <div class="footer-text">
-      <!-- CHANGE INSTAGRAM LINK HERE -->
-      <a href="https://www.instagram.com/g_singh9012?igsh=dmRla2Q2OTBrcjFv"
-        target="_blank"
-        style="color:rgba(232,220,200,0.6);text-decoration:none;display:block;margin-bottom:10px;">
-        Instagram →
-      </a>
-      <!-- CHANGE FACEBOOK LINK HERE -->
-      <a href="#" target="_blank"
-        style="color:rgba(232,220,200,0.6);text-decoration:none;display:block;margin-bottom:10px;">
-        Facebook →
-      </a>
-      <!-- CHANGE TWITTER LINK HERE -->
-      <a href="#" target="_blank"
-        style="color:rgba(232,220,200,0.6);text-decoration:none;display:block;">
-        Twitter →
-      </a>
+    <div>
+      <div class="footer-ttl">Visit Us</div>
+      <!-- ========== CHANGE ADDRESS HERE ========== -->
+      <div class="footer-txt">
+        Chhabra Colony<br/>
+        Jansath, Muzaffarnagar<br/>
+        Uttar Pradesh — 251314<br/><br/>
+        <!-- ========== CHANGE PHONE NUMBER HERE ========== -->
+        📞 +91 99977 39012
+      </div>
+      <!-- ========== CHANGE MAP LINK HERE ========== -->
+      <a class="footer-map" href="https://maps.app.goo.gl/Byc9CWc4PjPcx67P6" target="_blank">OPEN IN MAPS →</a>
+    </div>
+    <div>
+      <div class="footer-ttl">Connect</div>
+      <!-- ========== CHANGE SOCIAL LINKS HERE ========== -->
+      <a class="footer-link" href="https://www.instagram.com/g_singh9012?igsh=dmRla2Q2OTBrcjFv" target="_blank">Instagram →</a>
+      <a class="footer-link" href="https://www.facebook.com/share/14fa2tdmQxk/" target="_blank">Facebook →</a>
+      <a class="footer-link" href="#" target="_blank">Twitter →</a>
     </div>
   </div>
-  <div class="footer-bottom">
-    © 2026 Chhabra Cloth House. All Rights Reserved. Made with ❤️ in Jansath, Muzaffarnagar
-  </div>
+  <div class="footer-bottom">© 2026 Chhabra Cloth House. All Rights Reserved. Made with ❤️ in Jansath, Muzaffarnagar</div>
 </footer>
 
 <script>
-// ============================================
-// WELCOME SCREEN ANIMATION
-// ============================================
-window.addEventListener('load', function(){
-  const line1 = document.getElementById('welcome-line');
-  const line2 = document.getElementById('welcome-line2');
-  const cch = document.getElementById('welcome-cch');
-  const name = document.getElementById('welcome-name');
-  const sub = document.getElementById('welcome-sub');
-  const screen = document.getElementById('welcome-screen');
-  const hero = document.querySelector('.hero');
-
-  // Step 1: Draw gold lines
-  setTimeout(() => {
-    line1.style.width = '200px';
-    line2.style.width = '200px';
-  }, 300);
-
-  // Step 2: Show CCH
-  setTimeout(() => {
-    cch.style.opacity = '1';
-  }, 700);
-
-  // Step 3: Show name
-  setTimeout(() => {
-    name.style.opacity = '1';
-  }, 1000);
-
-  // Step 4: Show subtitle
-  setTimeout(() => {
-    sub.style.opacity = '1';
-  }, 1300);
-
-  // Step 5: Fade out welcome screen
-  setTimeout(() => {
-    screen.classList.add('fade-out');
-  }, 2500);
-
-  // Step 6: Remove welcome screen & show hero
-  setTimeout(() => {
-    screen.style.display = 'none';
-    hero.classList.add('visible');
-  }, 3300);
+/* ==================== WELCOME ANIMATION ==================== */
+window.addEventListener('load',function(){
+  var s=document.getElementById('welcome-screen');
+  setTimeout(function(){document.getElementById('wl1').style.width='180px';document.getElementById('wl2').style.width='180px';},300);
+  setTimeout(function(){document.getElementById('wcch').style.opacity='1';},700);
+  setTimeout(function(){document.getElementById('wname').style.opacity='1';},1000);
+  setTimeout(function(){document.getElementById('wsub').style.opacity='1';},1300);
+  setTimeout(function(){s.classList.add('out');},2600);
+  setTimeout(function(){
+    s.style.display='none';
+    var h=document.querySelector('.hero');
+    h.classList.add('show');
+    document.getElementById('htl').classList.add('show');
+    setTimeout(function(){document.getElementById('hest').classList.add('show');},100);
+    setTimeout(function(){document.getElementById('hphoto').classList.add('show');},200);
+    setTimeout(function(){document.getElementById('hlogo').classList.add('show');},350);
+    setTimeout(function(){document.getElementById('hsub').classList.add('show');},500);
+    setTimeout(function(){document.getElementById('hbtn').classList.add('show');},650);
+    setTimeout(function(){document.getElementById('hscroll').classList.add('show');},800);
+  },3400);
 });
 
-// ============================================
-// GLITTER TRANSITION — FIXED VERSION
-// ============================================
-function createGlitter(){
-  const overlay = document.getElementById('glitter-overlay');
-  overlay.innerHTML = '';
-  overlay.style.opacity = '1';
-  overlay.style.background = 'transparent';
-
-  const colors = ['#C9A84C','#FFD700','#FFF8DC','#DAA520','#F5DEB3'];
-
-  for(let i = 0; i < 80; i++){
-    const p = document.createElement('div');
-    p.className = 'glitter-particle';
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-    const size = Math.random() * 8 + 3;
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    const angle = Math.random() * 360;
-    const distance = Math.random() * 200 + 50;
-    const tx = Math.cos(angle) * distance;
-    const ty = Math.sin(angle) * distance;
-    const delay = Math.random() * 400;
-
-    p.style.cssText = `
-      left:${x}%;
-      top:${y}%;
-      width:${size}px;
-      height:${size}px;
-      background:${color};
-      box-shadow:0 0 ${size*2}px ${color};
-      animation:glitterMove 0.9s ease-out ${delay}ms forwards;
-      --tx:${tx}px;
-      --ty:${ty}px;
-    `;
-    overlay.appendChild(p);
+/* ==================== GLITTER ANIMATION — FIXED VERSION ==================== */
+function glitter(){
+  var o=document.getElementById('glitter-overlay');
+  o.innerHTML='';o.style.opacity='1';o.style.background='transparent';
+  if(!document.getElementById('gkf')){
+    var st=document.createElement('style');
+    st.id='gkf';
+    st.textContent='@keyframes gpMove{0%{transform:translate(0,0) scale(1);opacity:1;}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0;}}';
+    document.head.appendChild(st);
   }
-
-  // Add keyframes dynamically
-  if(!document.getElementById('glitter-keyframes')){
-    const style = document.createElement('style');
-    style.id = 'glitter-keyframes';
-    style.textContent = `
-      @keyframes glitterMove{
-        0%{transform:translate(0,0) scale(1);opacity:1;}
-        100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0;}
-      }
-    `;
-    document.head.appendChild(style);
+  var cols=['#C9A84C','#FFD700','#FFF8DC','#DAA520','#F5DEB3'];
+  for(var i=0;i<60;i++){
+    var p=document.createElement('div');
+    p.className='gp';
+    var x=Math.random()*100,y=Math.random()*100;
+    var size=Math.random()*6+3;
+    var col=cols[Math.floor(Math.random()*cols.length)];
+    var ang=Math.random()*360;
+    var dist=Math.random()*180+40;
+    var tx=Math.cos(ang*Math.PI/180)*dist;
+    var ty=Math.sin(ang*Math.PI/180)*dist;
+    var delay=Math.random()*350;
+    p.style.cssText='left:'+x+'%;top:'+y+'%;width:'+size+'px;height:'+size+'px;background:'+col+';--tx:'+tx+'px;--ty:'+ty+'px;animation:gpMove 0.85s ease-out '+delay+'ms forwards;';
+    o.appendChild(p);
   }
-
-  // Gold shimmer
-  setTimeout(() => {
-    overlay.style.background = 'rgba(201,168,76,0.12)';
-    overlay.style.transition = 'background 0.3s ease';
-  }, 500);
-
-  // FIXED: Clear overlay completely before navigation
-  setTimeout(() => {
-    overlay.style.opacity = '0';
-    overlay.style.background = 'transparent';
-    overlay.innerHTML = '';
-  }, 950);
+  setTimeout(function(){o.style.background='rgba(201,168,76,0.1)';o.style.transition='background 0.3s';},450);
+  setTimeout(function(){o.style.opacity='0';o.style.background='transparent';o.innerHTML='';},950);
 }
 
-// ============================================
-// GO TO PRODUCT — URL PARAMETERS (WORKS ON PHONE!)
-// ============================================
-function goToProduct(image, ext, name, price, fabric, occasion, description){
-  // Start glitter
-  createGlitter();
-
-  // Navigate using URL params after animation
-  setTimeout(() => {
-    const params = new URLSearchParams({
-      image: image,
-      ext: ext,
-      name: name,
-      price: price,
-      fabric: fabric,
-      occasion: occasion,
-      description: description
-    });
-    window.location.href = 'product.html?' + params.toString();
-  }, 1200);
+/* ==================== GO TO PRODUCT — URL PARAMS (WORKS ON PHONE) ==================== */
+function goToProduct(image,ext,name,price,fabric,occasion,description){
+  glitter();
+  setTimeout(function(){
+    var p=new URLSearchParams({image:image,ext:ext,name:name,price:price,fabric:fabric,occasion:occasion,description:description});
+    window.location.href='product.html?'+p.toString();
+  },1200);
 }
 
-// ============================================
-// MOBILE TOUCH SUPPORT FOR HOVER EFFECTS
-// ============================================
-document.querySelectorAll('.product-card, .suit-card-small, .suit-card-tall, .fabric-card').forEach(card => {
-  card.addEventListener('touchstart', function(){
-    // Remove touched from all other cards
-    document.querySelectorAll('.touched').forEach(c => c.classList.remove('touched'));
-    this.classList.add('touched');
-  }, {passive:true});
+/* ==================== MOBILE TOUCH SUPPORT ==================== */
+document.querySelectorAll('.bracket-wrap').forEach(function(c){
+  c.addEventListener('touchstart',function(){
+    document.querySelectorAll('.bracket-wrap.active').forEach(function(x){x.classList.remove('active');});
+    this.classList.add('active');
+  },{passive:true});
 });
 
-// ============================================
-// SCROLL ANIMATIONS
-// ============================================
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, {threshold:0.1});
-
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+/* ==================== SCROLL FADE IN ==================== */
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
 </script>
 </body>
 </html>
